@@ -1,0 +1,57 @@
+=== Version v0.1 =================
+
+Basic layout created
+
+Data structure added
+
+All pictures added
+
+=== Version v0.1b ================
+
+Actions now with functions
+
+Sequences and main added
+
+=== Version v0.2 =================
+
+All icons added
+
+Debugger added
+
+Compiler added
+
+Minor changes in layout
+
+=== Version v0.2a ================
+
+Simulator added (v0.1):
+
+	- Robot can be drawn
+	- Different layers for robot, grid and path
+	- Basic functions for driving manually
+
+=== Version v0.3a ================
+
+Minor changes in the code for better performances
+
+Simulator changes (v0.2):
+
+	- Main and subsequences can be imported to the simulator
+	- Different play modes added
+	- Basic functions added (reset, new...)
+
+=== Version v0.3b ================
+
+Help field added to main program
+
+Actions and functions got help
+
+=== version v0.4 =================
+
+Help is provided for all program features
+
+All sensors are included with function
+
+C code can directly be made and uploaded via MegaLoad
+
+Minor changes in program code for better performances

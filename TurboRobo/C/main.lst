@@ -1,0 +1,3669 @@
+   1               		.file	"main.c"
+   2               		.arch atmega32
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  11               		.text
+  12               	.Ltext0:
+  69               	.global	init_serial
+  71               	init_serial:
+  73               	.Ltext1:
+   1:lib/mct_fct.c **** #include <avr/io.h>
+   2:lib/mct_fct.c **** 
+   3:lib/mct_fct.c **** void init_serial(void)
+   4:lib/mct_fct.c **** {
+  74               	r28
+  75               		push r29
+  76               		in r28,__SP_L__
+  77 0000 CF93      		in r29,__SP_H__
+  78 0002 DF93      	/* prologue end (size=4) */
+  80 0006 DEB7      	.LM1:
+  81               		ldi r30,lo8(64)
+   5:lib/mct_fct.c **** 	UBRRH = 0;		//UBRR to 15 for 115200bps with 14.7456Mhz
+  82               	,hi8(64)
+  83               		st Z,__zero_reg__
+  85 000a F0E0      	.LM2:
+  86 000c 1082      		ldi r30,lo8(41)
+   6:lib/mct_fct.c **** 	UBRRL = 15;
+  87               	r31,hi8(41)
+  88               		ldi r24,lo8(15)
+  89 000e E9E2      		st Z,r24
+  91 0012 8FE0      	.LM3:
+  92 0014 8083      		ldi r30,lo8(43)
+   7:lib/mct_fct.c **** 	
+   8:lib/mct_fct.c **** 	UCSRA = 0x62;	// 
+  93               	31,hi8(43)
+  94               		ldi r24,lo8(98)
+  95 0016 EBE2      		st Z,r24
+  97 001a 82E6      	.LM4:
+  98 001c 8083      		ldi r30,lo8(42)
+   9:lib/mct_fct.c **** 	UCSRB = 0x18;	// interrupts disabled, transmitter and reciever enabled, 8bit, no 9th bit
+  99               	31,hi8(42)
+ 100               		ldi r24,lo8(24)
+ 101 001e EAE2      		st Z,r24
+ 103 0022 88E1      	.LM5:
+ 104 0024 8083      		ldi r30,lo8(64)
+  10:lib/mct_fct.c **** 	UCSRC = 0x86; 	// no parity, asynchronous, 1 stopbit, 8bit number
+ 105               	31,hi8(64)
+ 106               		ldi r24,lo8(-122)
+ 107 0026 E0E4      		st Z,r24
+ 108 0028 F0E0      	/* epilogue: frame size=0 */
+ 109 002a 86E8      		pop r29
+ 110 002c 8083      		pop r28
+ 111               		ret
+ 112 002e DF91      	/* epilogue end (size=3) */
+ 113 0030 CF91      	/* function init_serial size 26 (19) */
+ 115               	.Lscope0:
+ 117               	.global	init_in_ana
+ 119               	init_in_ana:
+ 121               	.LM6:
+ 122               	/* prologue: frame size=0 */
+  11:lib/mct_fct.c **** }
+  12:lib/mct_fct.c **** 
+  13:lib/mct_fct.c **** void init_in_ana(void)
+  14:lib/mct_fct.c **** {
+ 123               	9
+ 124               		in r28,__SP_L__
+ 125               		in r29,__SP_H__
+ 126 0034 CF93      	/* prologue end (size=4) */
+ 128 0038 CDB7      	.LM7:
+ 129 003a DEB7      		ldi r30,lo8(39)
+ 130               		ldi r31,hi8(39)
+  15:lib/mct_fct.c **** 	ADMUX = 0x40;	//connect to pin 0
+ 131               	,lo8(64)
+ 132               		st Z,r24
+ 134 003e F0E0      	.LM8:
+ 135 0040 80E4      		ldi r30,lo8(38)
+ 136 0042 8083      		ldi r31,hi8(38)
+  16:lib/mct_fct.c **** 	ADCSRA = 0x9e;	//enable ad converter
+ 137               	24,lo8(-98)
+ 138               		st Z,r24
+ 140 0046 F0E0      	.LM9:
+ 141 0048 8EE9      		ldi r26,lo8(38)
+ 142 004a 8083      		ldi r27,hi8(38)
+  17:lib/mct_fct.c **** 	ADCSRA |= 0x60;	//start converter
+ 143               	30,lo8(38)
+ 144               		ldi r31,hi8(38)
+ 145 004c A6E2      		ld r24,Z
+ 146 004e B0E0      		ori r24,lo8(96)
+ 147 0050 E6E2      		st X,r24
+ 148 0052 F0E0      	/* epilogue: frame size=0 */
+ 149 0054 8081      		pop r29
+ 150 0056 8066      		pop r28
+ 151 0058 8C93      		ret
+ 152               	/* epilogue end (size=3) */
+ 153 005a DF91      	/* function init_in_ana size 22 (15) */
+ 155 005e 0895      	.Lscope1:
+ 157               	.global	init_in
+ 159               	init_in:
+ 161               	.LM10:
+ 162               	/* prologue: frame size=0 */
+ 163               		push r28
+  18:lib/mct_fct.c **** }
+  19:lib/mct_fct.c **** 
+  20:lib/mct_fct.c **** void init_in(void)
+  21:lib/mct_fct.c **** {
+ 164               	P_L__
+ 165               		in r29,__SP_H__
+ 166               	/* prologue end (size=4) */
+ 168 0062 DF93      	.LM11:
+ 169 0064 CDB7      		ldi r30,lo8(52)
+ 170 0066 DEB7      		ldi r31,hi8(52)
+ 171               		st Z,__zero_reg__
+  22:lib/mct_fct.c **** 	DDRC = 0x00;
+ 172               	gue: frame size=0 */
+ 173               		pop r29
+ 174 0068 E4E3      		pop r28
+ 175 006a F0E0      		ret
+ 176 006c 1082      	/* epilogue end (size=3) */
+ 177               	/* function init_in size 10 (3) */
+ 179 0070 CF91      	.Lscope2:
+ 182               	.global	get_in_pin
+ 184               	get_in_pin:
+ 186               	.LM12:
+ 187               	/* prologue: frame size=3 */
+ 188               		push r28
+ 189               		push r29
+  23:lib/mct_fct.c **** }
+  24:lib/mct_fct.c **** 
+  25:lib/mct_fct.c **** unsigned char get_in_pin(unsigned char p)
+  26:lib/mct_fct.c **** {
+ 190               	in r29,__SP_H__
+ 191               		sbiw r28,3
+ 192               		in __tmp_reg__,__SREG__
+ 193 0074 CF93      		cli
+ 194 0076 DF93      		out __SP_H__,r29
+ 195 0078 CDB7      		out __SREG__,__tmp_reg__
+ 196 007a DEB7      		out __SP_L__,r28
+ 197 007c 2397      	/* prologue end (size=10) */
+ 198 007e 0FB6      		std Y+3,r24
+ 200 0082 DEBF      	.LM13:
+ 201 0084 0FBE      		std Y+2,__zero_reg__
+ 203               	.LM14:
+ 204 0088 8B83      		ldi r24,lo8(1)
+  27:lib/mct_fct.c **** 	unsigned char c = 0;
+ 205               	stabn	68,0,30,.LM15-get_in_pin
+ 206               	.LM15:
+ 207 008a 1A82      		ldd r24,Y+1
+  28:lib/mct_fct.c **** 	unsigned char shift = 0x01;
+ 208               	v r18,r24
+ 209               		clr r19
+ 210 008c 81E0      		ldd r24,Y+3
+ 211 008e 8983      		clr r25
+  29:lib/mct_fct.c **** 	
+  30:lib/mct_fct.c **** 	shift <<= (p-1);
+ 212               	w r24,1
+ 213               		movw r20,r18
+ 214 0090 8981      		rjmp 2f
+ 215 0092 282F      	1:	lsl r20
+ 216 0094 3327      		rol r21
+ 217 0096 8B81      	2:	dec r24
+ 218 0098 9927      		brpl 1b
+ 219 009a 0197      		movw r24,r20
+ 220 009c A901      		std Y+1,r24
+ 222 00a0 440F      	.LM16:
+ 223 00a2 551F      		ldi r30,lo8(51)
+ 224 00a4 8A95      		ldi r31,hi8(51)
+ 225 00a6 02F4      		ld r24,Z
+ 226 00a8 CA01      		std Y+2,r24
+  31:lib/mct_fct.c **** 	c = PINC;
+ 228               	Y+2
+ 229               		ldd r24,Y+1
+ 230 00ac E3E3      		and r24,r25
+ 231 00ae F0E0      		std Y+2,r24
+ 233 00b2 8A83      	.LM18:
+  32:lib/mct_fct.c **** 	c &= shift;
+ 234               	24,Y+2
+ 235               		clr r25
+ 236 00b4 9A81      	/* epilogue: frame size=3 */
+ 237 00b6 8981      		adiw r28,3
+ 238 00b8 8923      		in __tmp_reg__,__SREG__
+ 239 00ba 8A83      		cli
+  33:lib/mct_fct.c **** 	
+  34:lib/mct_fct.c **** 	return c;
+ 240               	_SP_H__,r29
+ 241               		out __SREG__,__tmp_reg__
+ 242 00bc 8A81      		out __SP_L__,r28
+ 243 00be 9927      		pop r29
+ 244               		pop r28
+ 245 00c0 2396      		ret
+ 246 00c2 0FB6      	/* epilogue end (size=9) */
+ 247 00c4 F894      	/* function get_in_pin size 48 (29) */
+ 253 00d0 0895      	.Lscope3:
+ 255               	.global	get_in_port
+ 257               	get_in_port:
+ 259               	.LM19:
+ 260               	/* prologue: frame size=1 */
+ 261               		push r28
+ 262               		push r29
+ 263               		in r28,__SP_L__
+ 264               		in r29,__SP_H__
+ 265               		sbiw r28,1
+  35:lib/mct_fct.c **** }
+  36:lib/mct_fct.c **** 
+  37:lib/mct_fct.c **** unsigned char get_in_port(void)
+  38:lib/mct_fct.c **** {
+ 266               	cli
+ 267               		out __SP_H__,r29
+ 268               		out __SREG__,__tmp_reg__
+ 269 00d2 CF93      		out __SP_L__,r28
+ 270 00d4 DF93      	/* prologue end (size=10) */
+ 272 00d8 DEB7      	.LM20:
+ 273 00da 2197      		std Y+1,__zero_reg__
+ 275 00de F894      	.LM21:
+ 276 00e0 DEBF      		ldi r30,lo8(51)
+ 277 00e2 0FBE      		ldi r31,hi8(51)
+ 278 00e4 CDBF      		ld r24,Z
+ 279               		std Y+1,r24
+  39:lib/mct_fct.c **** 	unsigned char c = 0;
+ 280               	3,.LM22-get_in_port
+ 281               	.LM22:
+ 282 00e6 1982      		ldd r24,Y+1
+  40:lib/mct_fct.c **** 	
+  41:lib/mct_fct.c **** 	c = PINC;
+ 283               	r r25
+ 284               	/* epilogue: frame size=1 */
+ 285 00e8 E3E3      		adiw r28,1
+ 286 00ea F0E0      		in __tmp_reg__,__SREG__
+ 287 00ec 8081      		cli
+ 288 00ee 8983      		out __SP_H__,r29
+  42:lib/mct_fct.c **** 	
+  43:lib/mct_fct.c **** 	return c;
+ 289               	_SREG__,__tmp_reg__
+ 290               		out __SP_L__,r28
+ 291 00f0 8981      		pop r29
+ 292 00f2 9927      		pop r28
+ 293               		ret
+ 294 00f4 2196      	/* epilogue end (size=9) */
+ 295 00f6 0FB6      	/* function get_in_port size 26 (7) */
+ 300 0100 DF91      	.Lscope4:
+ 302 0104 0895      	.global	init_out
+ 304               	init_out:
+ 306               	.LM23:
+ 307               	/* prologue: frame size=0 */
+ 308               		push r28
+ 309               		push r29
+ 310               		in r28,__SP_L__
+ 311               		in r29,__SP_H__
+ 312               	/* prologue end (size=4) */
+  44:lib/mct_fct.c **** }
+  45:lib/mct_fct.c **** 
+  46:lib/mct_fct.c **** void init_out(void)
+  47:lib/mct_fct.c **** {
+ 314               	ldi r31,hi8(55)
+ 315               		ldi r24,lo8(15)
+ 316               		st Z,r24
+ 318 0108 DF93      	.LM25:
+ 319 010a CDB7      		ldi r30,lo8(49)
+ 320 010c DEB7      		ldi r31,hi8(49)
+ 321               		ldi r24,lo8(-16)
+  48:lib/mct_fct.c **** 	DDRB = 0x0f;
+ 322               	4
+ 324 010e E7E3      	.LM26:
+ 325 0110 F0E0      		ldi r30,lo8(56)
+ 326 0112 8FE0      		ldi r31,hi8(56)
+ 327 0114 8083      		ldi r24,lo8(-1)
+  49:lib/mct_fct.c **** 	DDRD = 0xf0;
+ 328               	r24
+ 330 0116 E1E3      	.LM27:
+ 331 0118 F0E0      		ldi r30,lo8(50)
+ 332 011a 80EF      		ldi r31,hi8(50)
+ 333 011c 8083      		ldi r24,lo8(-1)
+  50:lib/mct_fct.c **** 	PORTB = 0xff;
+ 334               	r24
+ 335               	/* epilogue: frame size=0 */
+ 336 011e E8E3      		pop r29
+ 337 0120 F0E0      		pop r28
+ 338 0122 8FEF      		ret
+ 339 0124 8083      	/* epilogue end (size=3) */
+  51:lib/mct_fct.c **** 	PORTD = 0xff;	
+ 340               	ction init_out size 23 (16) */
+ 342 0126 E2E3      	.Lscope5:
+ 345 012c 8083      	.global	set_out_pin
+ 347 012e DF91      	set_out_pin:
+ 349 0132 0895      	.LM28:
+ 350               	/* prologue: frame size=3 */
+ 351               		push r28
+ 352               		push r29
+ 353               		in r28,__SP_L__
+ 354               		in r29,__SP_H__
+ 355               		sbiw r28,3
+ 356               		in __tmp_reg__,__SREG__
+ 357               		cli
+ 358               		out __SP_H__,r29
+  52:lib/mct_fct.c **** }
+  53:lib/mct_fct.c **** 
+  54:lib/mct_fct.c **** 
+  55:lib/mct_fct.c **** void set_out_pin(unsigned char p)
+  56:lib/mct_fct.c **** {
+ 359               	_reg__
+ 360               		out __SP_L__,r28
+ 361               	/* prologue end (size=10) */
+ 362 0134 CF93      		std Y+1,r24
+ 364 0138 CDB7      	.LM29:
+ 365 013a DEB7      		ldd r24,Y+1
+ 366 013c 2397      		mov r18,r24
+ 367 013e 0FB6      		clr r19
+ 368 0140 F894      		std Y+3,r19
+ 369 0142 DEBF      		std Y+2,r18
+ 370 0144 0FBE      		ldd r24,Y+2
+ 371 0146 CDBF      		ldd r25,Y+3
+ 372               		cpi r24,4
+ 373 0148 8983      		cpc r25,__zero_reg__
+  57:lib/mct_fct.c **** 	switch(p)
+ 374               	abn	68,0,57,.LM30-set_out_pin
+ 375               	.LM30:
+ 376 014a 8981      		ldd r18,Y+2
+ 377 014c 282F      		ldd r19,Y+3
+ 378 014e 3327      		cpi r18,5
+ 379 0150 3B83      		cpc r19,__zero_reg__
+ 380 0152 2A83      		brge .L23
+ 381 0154 8A81      		ldd r24,Y+2
+ 382 0156 9B81      		ldd r25,Y+3
+ 383 0158 8430      		cpi r24,2
+ 384 015a 9105      		cpc r25,__zero_reg__
+ 385 015c 01F0      		breq .L16
+ 386               		ldd r18,Y+2
+ 387               		ldd r19,Y+3
+ 388 015e 2A81      		cpi r18,3
+ 389 0160 3B81      		cpc r19,__zero_reg__
+ 390 0162 2530      		brge .L17
+ 391 0164 3105      		ldd r24,Y+2
+ 392 0166 04F4      		ldd r25,Y+3
+ 393 0168 8A81      		cpi r24,1
+ 394 016a 9B81      		cpc r25,__zero_reg__
+ 395 016c 8230      		breq .L15
+ 396 016e 9105      		rjmp .L24
+ 397 0170 01F0      	.L23:
+ 398 0172 2A81      		ldd r18,Y+2
+ 399 0174 3B81      		ldd r19,Y+3
+ 400 0176 2330      		cpi r18,6
+ 401 0178 3105      		cpc r19,__zero_reg__
+ 402 017a 04F4      		brne .+2
+ 403 017c 8A81      		rjmp .L20
+ 404 017e 9B81      		ldd r24,Y+2
+ 405 0180 8130      		ldd r25,Y+3
+ 406 0182 9105      		cpi r24,6
+ 407 0184 01F0      		cpc r25,__zero_reg__
+ 408 0186 00C0      		brge .+2
+ 409               		rjmp .L19
+ 410 0188 2A81      		ldd r18,Y+2
+ 411 018a 3B81      		ldd r19,Y+3
+ 412 018c 2630      		cpi r18,7
+ 413 018e 3105      		cpc r19,__zero_reg__
+ 414 0190 01F4      		breq .L21
+ 415 0192 00C0      		ldd r24,Y+2
+ 416 0194 8A81      		ldd r25,Y+3
+ 417 0196 9B81      		cpi r24,8
+ 418 0198 8630      		cpc r25,__zero_reg__
+ 419 019a 9105      		breq .L22
+ 420 019c 04F4      		rjmp .L24
+ 421 019e 00C0      	.L18:
+ 423 01a2 3B81      	.LM31:
+ 424 01a4 2730      		ldi r26,lo8(50)
+ 425 01a6 3105      		ldi r27,hi8(50)
+ 426 01a8 01F0      		ldi r30,lo8(50)
+ 427 01aa 8A81      		ldi r31,hi8(50)
+ 428 01ac 9B81      		ld r24,Z
+ 429 01ae 8830      		andi r24,lo8(127)
+ 430 01b0 9105      		st X,r24
+ 432 01b4 00C0      	.LM32:
+ 433               		rjmp .L24
+  58:lib/mct_fct.c **** 	{
+  59:lib/mct_fct.c **** 		case 4:
+  60:lib/mct_fct.c **** 			PORTD = PORTD & 0x7f;
+ 434               	50)
+ 435               		ldi r27,hi8(50)
+ 436 01b6 A2E3      		ldi r30,lo8(50)
+ 437 01b8 B0E0      		ldi r31,hi8(50)
+ 438 01ba E2E3      		ld r25,Z
+ 439 01bc F0E0      		ldi r24,lo8(-65)
+ 440 01be 8081      		and r24,r25
+ 441 01c0 8F77      		st X,r24
+  61:lib/mct_fct.c **** 			break;
+ 443               	jmp .L24
+ 444               	.L16:
+ 446               	.LM35:
+  62:lib/mct_fct.c **** 		case 3:
+  63:lib/mct_fct.c **** 			PORTD = PORTD & 0xBf;
+ 447               	 r26,lo8(50)
+ 448               		ldi r27,hi8(50)
+ 449 01c6 A2E3      		ldi r30,lo8(50)
+ 450 01c8 B0E0      		ldi r31,hi8(50)
+ 451 01ca E2E3      		ld r25,Z
+ 452 01cc F0E0      		ldi r24,lo8(-33)
+ 453 01ce 9081      		and r24,r25
+ 454 01d0 8FEB      		st X,r24
+ 456 01d4 8C93      	.LM36:
+  64:lib/mct_fct.c **** 			break;
+ 457               	
+ 458               	.L15:
+ 460               	.LM37:
+  65:lib/mct_fct.c **** 		case 2:
+  66:lib/mct_fct.c **** 			PORTD = PORTD & 0xDf;
+ 461               	i r26,lo8(50)
+ 462               		ldi r27,hi8(50)
+ 463 01d8 A2E3      		ldi r30,lo8(50)
+ 464 01da B0E0      		ldi r31,hi8(50)
+ 465 01dc E2E3      		ld r25,Z
+ 466 01de F0E0      		ldi r24,lo8(-17)
+ 467 01e0 9081      		and r24,r25
+ 468 01e2 8FED      		st X,r24
+ 470 01e6 8C93      	.LM38:
+  67:lib/mct_fct.c **** 			break;
+ 471               	
+ 472               	.L22:
+ 474               	.LM39:
+  68:lib/mct_fct.c **** 		case 1:
+  69:lib/mct_fct.c **** 			PORTD = PORTD & 0xEf;
+ 475               	i r26,lo8(56)
+ 476               		ldi r27,hi8(56)
+ 477 01ea A2E3      		ldi r30,lo8(56)
+ 478 01ec B0E0      		ldi r31,hi8(56)
+ 479 01ee E2E3      		ld r25,Z
+ 480 01f0 F0E0      		ldi r24,lo8(-9)
+ 481 01f2 9081      		and r24,r25
+ 482 01f4 8FEE      		st X,r24
+ 484 01f8 8C93      	.LM40:
+  70:lib/mct_fct.c **** 			break;
+ 485               	
+ 486               	.L21:
+ 488               	.LM41:
+  71:lib/mct_fct.c **** 		case 8:
+  72:lib/mct_fct.c **** 			PORTB = PORTB & 0xf7;
+ 489               	i r26,lo8(56)
+ 490               		ldi r27,hi8(56)
+ 491 01fc A8E3      		ldi r30,lo8(56)
+ 492 01fe B0E0      		ldi r31,hi8(56)
+ 493 0200 E8E3      		ld r25,Z
+ 494 0202 F0E0      		ldi r24,lo8(-5)
+ 495 0204 9081      		and r24,r25
+ 496 0206 87EF      		st X,r24
+ 498 020a 8C93      	.LM42:
+  73:lib/mct_fct.c **** 			break;
+ 499               	
+ 500               	.L20:
+ 502               	.LM43:
+  74:lib/mct_fct.c **** 		case 7:
+  75:lib/mct_fct.c **** 			PORTB = PORTB & 0xfb;
+ 503               	i r26,lo8(56)
+ 504               		ldi r27,hi8(56)
+ 505 020e A8E3      		ldi r30,lo8(56)
+ 506 0210 B0E0      		ldi r31,hi8(56)
+ 507 0212 E8E3      		ld r25,Z
+ 508 0214 F0E0      		ldi r24,lo8(-3)
+ 509 0216 9081      		and r24,r25
+ 510 0218 8BEF      		st X,r24
+ 512 021c 8C93      	.LM44:
+  76:lib/mct_fct.c **** 			break;
+ 513               	
+ 514               	.L19:
+ 516               	.LM45:
+  77:lib/mct_fct.c **** 		case 6:
+  78:lib/mct_fct.c **** 			PORTB = PORTB & 0xfd;
+ 517               	i r26,lo8(56)
+ 518               		ldi r27,hi8(56)
+ 519 0220 A8E3      		ldi r30,lo8(56)
+ 520 0222 B0E0      		ldi r31,hi8(56)
+ 521 0224 E8E3      		ld r25,Z
+ 522 0226 F0E0      		ldi r24,lo8(-2)
+ 523 0228 9081      		and r24,r25
+ 524 022a 8DEF      		st X,r24
+ 525 022c 8923      	.L24:
+ 526 022e 8C93      	/* epilogue: frame size=3 */
+  79:lib/mct_fct.c **** 			break;
+ 527               	3
+ 528               		in __tmp_reg__,__SREG__
+ 529 0230 00C0      		cli
+ 530               		out __SP_H__,r29
+  80:lib/mct_fct.c **** 		case 5:
+  81:lib/mct_fct.c **** 			PORTB = PORTB & 0xfe;
+ 531               	 __SREG__,__tmp_reg__
+ 532               		out __SP_L__,r28
+ 533 0232 A8E3      		pop r29
+ 534 0234 B0E0      		pop r28
+ 535 0236 E8E3      		ret
+ 536 0238 F0E0      	/* epilogue end (size=9) */
+ 537 023a 9081      	/* function set_out_pin size 145 (126) */
+ 539 023e 8923      	.Lscope6:
+ 542               	.global	reset_out_pin
+ 544 0244 0FB6      	reset_out_pin:
+ 546 0248 DEBF      	.LM46:
+ 547 024a 0FBE      	/* prologue: frame size=3 */
+ 548 024c CDBF      		push r28
+ 549 024e DF91      		push r29
+ 550 0250 CF91      		in r28,__SP_L__
+ 551 0252 0895      		in r29,__SP_H__
+ 552               		sbiw r28,3
+ 553               		in __tmp_reg__,__SREG__
+ 554               		cli
+ 555               		out __SP_H__,r29
+ 556               		out __SREG__,__tmp_reg__
+ 557               		out __SP_L__,r28
+ 558               	/* prologue end (size=10) */
+ 559               		std Y+1,r24
+  82:lib/mct_fct.c **** 			break;
+  83:lib/mct_fct.c **** 	}		
+  84:lib/mct_fct.c **** }
+  85:lib/mct_fct.c **** 
+  86:lib/mct_fct.c **** void reset_out_pin(unsigned char p)
+  87:lib/mct_fct.c **** {
+ 561               	24
+ 562               		clr r19
+ 563               		std Y+3,r19
+ 564 0254 CF93      		std Y+2,r18
+ 565 0256 DF93      		ldd r24,Y+2
+ 566 0258 CDB7      		ldd r25,Y+3
+ 567 025a DEB7      		cpi r24,4
+ 568 025c 2397      		cpc r25,__zero_reg__
+ 569 025e 0FB6      		breq .L30
+ 571 0262 DEBF      	.LM48:
+ 572 0264 0FBE      		ldd r18,Y+2
+ 573 0266 CDBF      		ldd r19,Y+3
+ 574               		cpi r18,5
+ 575 0268 8983      		cpc r19,__zero_reg__
+  88:lib/mct_fct.c **** 	switch(p)
+ 576               	 r24,Y+2
+ 577               		ldd r25,Y+3
+ 578 026a 8981      		cpi r24,2
+ 579 026c 282F      		cpc r25,__zero_reg__
+ 580 026e 3327      		breq .L28
+ 581 0270 3B83      		ldd r18,Y+2
+ 582 0272 2A83      		ldd r19,Y+3
+ 583 0274 8A81      		cpi r18,3
+ 584 0276 9B81      		cpc r19,__zero_reg__
+ 585 0278 8430      		brge .L29
+ 586 027a 9105      		ldd r24,Y+2
+ 587 027c 01F0      		ldd r25,Y+3
+ 588               		cpi r24,1
+ 589               		cpc r25,__zero_reg__
+ 590 027e 2A81      		breq .L27
+ 591 0280 3B81      		rjmp .L36
+ 592 0282 2530      	.L35:
+ 593 0284 3105      		ldd r18,Y+2
+ 594 0286 04F4      		ldd r19,Y+3
+ 595 0288 8A81      		cpi r18,6
+ 596 028a 9B81      		cpc r19,__zero_reg__
+ 597 028c 8230      		brne .+2
+ 598 028e 9105      		rjmp .L32
+ 599 0290 01F0      		ldd r24,Y+2
+ 600 0292 2A81      		ldd r25,Y+3
+ 601 0294 3B81      		cpi r24,6
+ 602 0296 2330      		cpc r25,__zero_reg__
+ 603 0298 3105      		brge .+2
+ 604 029a 04F4      		rjmp .L31
+ 605 029c 8A81      		ldd r18,Y+2
+ 606 029e 9B81      		ldd r19,Y+3
+ 607 02a0 8130      		cpi r18,7
+ 608 02a2 9105      		cpc r19,__zero_reg__
+ 609 02a4 01F0      		breq .L33
+ 610 02a6 00C0      		ldd r24,Y+2
+ 611               		ldd r25,Y+3
+ 612 02a8 2A81      		cpi r24,8
+ 613 02aa 3B81      		cpc r25,__zero_reg__
+ 614 02ac 2630      		breq .L34
+ 615 02ae 3105      		rjmp .L36
+ 616 02b0 01F4      	.L30:
+ 618 02b4 8A81      	.LM49:
+ 619 02b6 9B81      		ldi r26,lo8(50)
+ 620 02b8 8630      		ldi r27,hi8(50)
+ 621 02ba 9105      		ldi r30,lo8(50)
+ 622 02bc 04F4      		ldi r31,hi8(50)
+ 623 02be 00C0      		ld r24,Z
+ 624 02c0 2A81      		ori r24,lo8(-128)
+ 625 02c2 3B81      		st X,r24
+ 627 02c6 3105      	.LM50:
+ 628 02c8 01F0      		rjmp .L36
+ 629 02ca 8A81      	.L29:
+ 631 02ce 8830      	.LM51:
+ 632 02d0 9105      		ldi r26,lo8(50)
+ 633 02d2 01F0      		ldi r27,hi8(50)
+ 634 02d4 00C0      		ldi r30,lo8(50)
+ 635               		ldi r31,hi8(50)
+  89:lib/mct_fct.c **** 	{
+  90:lib/mct_fct.c **** 		case 4:
+  91:lib/mct_fct.c **** 			PORTD = PORTD | 0x80;
+ 636               	eset_out_pin
+ 637               	.LM52:
+ 638 02d6 A2E3      		rjmp .L36
+ 639 02d8 B0E0      	.L28:
+ 641 02dc F0E0      	.LM53:
+ 642 02de 8081      		ldi r26,lo8(50)
+ 643 02e0 8068      		ldi r27,hi8(50)
+ 644 02e2 8C93      		ldi r30,lo8(50)
+  92:lib/mct_fct.c **** 			break;
+ 645               	hi8(50)
+ 646               		ld r24,Z
+ 647 02e4 00C0      		ori r24,lo8(32)
+ 648               		st X,r24
+  93:lib/mct_fct.c **** 		case 3:
+  94:lib/mct_fct.c **** 			PORTD = PORTD | 0x40;
+ 649               	abn	68,0,98,.LM54-reset_out_pin
+ 650               	.LM54:
+ 651 02e6 A2E3      		rjmp .L36
+ 652 02e8 B0E0      	.L27:
+ 654 02ec F0E0      	.LM55:
+ 655 02ee 8081      		ldi r26,lo8(50)
+ 656 02f0 8064      		ldi r27,hi8(50)
+ 657 02f2 8C93      		ldi r30,lo8(50)
+  95:lib/mct_fct.c **** 			break;
+ 658               	hi8(50)
+ 659               		ld r24,Z
+ 660 02f4 00C0      		ori r24,lo8(16)
+ 661               		st X,r24
+  96:lib/mct_fct.c **** 		case 2:
+  97:lib/mct_fct.c **** 			PORTD = PORTD | 0x20;
+ 662               	abn	68,0,101,.LM56-reset_out_pin
+ 663               	.LM56:
+ 664 02f6 A2E3      		rjmp .L36
+ 665 02f8 B0E0      	.L34:
+ 667 02fc F0E0      	.LM57:
+ 668 02fe 8081      		ldi r26,lo8(56)
+ 669 0300 8062      		ldi r27,hi8(56)
+ 670 0302 8C93      		ldi r30,lo8(56)
+  98:lib/mct_fct.c **** 			break;
+ 671               	hi8(56)
+ 672               		ld r24,Z
+ 673 0304 00C0      		ori r24,lo8(8)
+ 674               		st X,r24
+  99:lib/mct_fct.c **** 		case 1:
+ 100:lib/mct_fct.c **** 			PORTD = PORTD | 0x10;
+ 675               	abn	68,0,104,.LM58-reset_out_pin
+ 676               	.LM58:
+ 677 0306 A2E3      		rjmp .L36
+ 678 0308 B0E0      	.L33:
+ 680 030c F0E0      	.LM59:
+ 681 030e 8081      		ldi r26,lo8(56)
+ 682 0310 8061      		ldi r27,hi8(56)
+ 683 0312 8C93      		ldi r30,lo8(56)
+ 101:lib/mct_fct.c **** 			break;
+ 684               	hi8(56)
+ 685               		ld r24,Z
+ 686 0314 00C0      		ori r24,lo8(4)
+ 687               		st X,r24
+ 102:lib/mct_fct.c **** 		case 8:
+ 103:lib/mct_fct.c **** 			PORTB = PORTB | 0x08;
+ 688               	abn	68,0,107,.LM60-reset_out_pin
+ 689               	.LM60:
+ 690 0316 A8E3      		rjmp .L36
+ 691 0318 B0E0      	.L32:
+ 693 031c F0E0      	.LM61:
+ 694 031e 8081      		ldi r26,lo8(56)
+ 695 0320 8860      		ldi r27,hi8(56)
+ 696 0322 8C93      		ldi r30,lo8(56)
+ 104:lib/mct_fct.c **** 			break;
+ 697               	hi8(56)
+ 698               		ld r24,Z
+ 699 0324 00C0      		ori r24,lo8(2)
+ 700               		st X,r24
+ 105:lib/mct_fct.c **** 		case 7:
+ 106:lib/mct_fct.c **** 			PORTB = PORTB | 0x04;
+ 701               	abn	68,0,110,.LM62-reset_out_pin
+ 702               	.LM62:
+ 703 0326 A8E3      		rjmp .L36
+ 704 0328 B0E0      	.L31:
+ 706 032c F0E0      	.LM63:
+ 707 032e 8081      		ldi r26,lo8(56)
+ 708 0330 8460      		ldi r27,hi8(56)
+ 709 0332 8C93      		ldi r30,lo8(56)
+ 107:lib/mct_fct.c **** 			break;
+ 710               	hi8(56)
+ 711               		ld r24,Z
+ 712 0334 00C0      		ori r24,lo8(1)
+ 713               		st X,r24
+ 108:lib/mct_fct.c **** 		case 6:
+ 109:lib/mct_fct.c **** 			PORTB = PORTB | 0x02;
+ 714               	:
+ 715               	/* epilogue: frame size=3 */
+ 716 0336 A8E3      		adiw r28,3
+ 717 0338 B0E0      		in __tmp_reg__,__SREG__
+ 718 033a E8E3      		cli
+ 719 033c F0E0      		out __SP_H__,r29
+ 720 033e 8081      		out __SREG__,__tmp_reg__
+ 721 0340 8260      		out __SP_L__,r28
+ 722 0342 8C93      		pop r29
+ 110:lib/mct_fct.c **** 			break;
+ 723               		ret
+ 724               	/* epilogue end (size=9) */
+ 725 0344 00C0      	/* function reset_out_pin size 138 (119) */
+ 111:lib/mct_fct.c **** 		case 5:
+ 112:lib/mct_fct.c **** 			PORTB = PORTB | 0x01;
+ 727               	ope7:
+ 730 0348 B0E0      	.global	toggle_out_pin
+ 732 034c F0E0      	toggle_out_pin:
+ 734 0350 8160      	.LM64:
+ 735 0352 8C93      	/* prologue: frame size=3 */
+ 736               		push r28
+ 737               		push r29
+ 738 0354 2396      		in r28,__SP_L__
+ 739 0356 0FB6      		in r29,__SP_H__
+ 740 0358 F894      		sbiw r28,3
+ 741 035a DEBF      		in __tmp_reg__,__SREG__
+ 742 035c 0FBE      		cli
+ 743 035e CDBF      		out __SP_H__,r29
+ 744 0360 DF91      		out __SREG__,__tmp_reg__
+ 745 0362 CF91      		out __SP_L__,r28
+ 746 0364 0895      	/* prologue end (size=10) */
+ 747               		std Y+1,r24
+ 749               	.LM65:
+ 750               		ldd r24,Y+1
+ 751               		mov r18,r24
+ 752               		clr r19
+ 753               		std Y+3,r19
+ 754               		std Y+2,r18
+ 755               		ldd r24,Y+2
+ 113:lib/mct_fct.c **** 			break;
+ 114:lib/mct_fct.c **** 	}
+ 115:lib/mct_fct.c **** }
+ 116:lib/mct_fct.c **** 
+ 117:lib/mct_fct.c **** void toggle_out_pin(unsigned char p)
+ 118:lib/mct_fct.c **** {
+ 756               	r25,__zero_reg__
+ 757               		breq .L42
+ 759 0366 CF93      	.LM66:
+ 760 0368 DF93      		ldd r18,Y+2
+ 761 036a CDB7      		ldd r19,Y+3
+ 762 036c DEB7      		cpi r18,5
+ 763 036e 2397      		cpc r19,__zero_reg__
+ 764 0370 0FB6      		brge .L47
+ 765 0372 F894      		ldd r24,Y+2
+ 766 0374 DEBF      		ldd r25,Y+3
+ 767 0376 0FBE      		cpi r24,2
+ 768 0378 CDBF      		cpc r25,__zero_reg__
+ 769               		breq .L40
+ 770 037a 8983      		ldd r18,Y+2
+ 119:lib/mct_fct.c **** 	switch(p)
+ 771               	pi r18,3
+ 772               		cpc r19,__zero_reg__
+ 773 037c 8981      		brge .L41
+ 774 037e 282F      		ldd r24,Y+2
+ 775 0380 3327      		ldd r25,Y+3
+ 776 0382 3B83      		cpi r24,1
+ 777 0384 2A83      		cpc r25,__zero_reg__
+ 778 0386 8A81      		breq .L39
+ 779 0388 9B81      		rjmp .L48
+ 780 038a 8430      	.L47:
+ 781 038c 9105      		ldd r18,Y+2
+ 782 038e 01F0      		ldd r19,Y+3
+ 783               		cpi r18,6
+ 784               		cpc r19,__zero_reg__
+ 785 0390 2A81      		brne .+2
+ 786 0392 3B81      		rjmp .L44
+ 787 0394 2530      		ldd r24,Y+2
+ 788 0396 3105      		ldd r25,Y+3
+ 789 0398 04F4      		cpi r24,6
+ 790 039a 8A81      		cpc r25,__zero_reg__
+ 791 039c 9B81      		brge .+2
+ 792 039e 8230      		rjmp .L43
+ 793 03a0 9105      		ldd r18,Y+2
+ 794 03a2 01F0      		ldd r19,Y+3
+ 795 03a4 2A81      		cpi r18,7
+ 796 03a6 3B81      		cpc r19,__zero_reg__
+ 797 03a8 2330      		breq .L45
+ 798 03aa 3105      		ldd r24,Y+2
+ 799 03ac 04F4      		ldd r25,Y+3
+ 800 03ae 8A81      		cpi r24,8
+ 801 03b0 9B81      		cpc r25,__zero_reg__
+ 802 03b2 8130      		breq .L46
+ 803 03b4 9105      		rjmp .L48
+ 804 03b6 01F0      	.L42:
+ 806               	.LM67:
+ 807 03ba 2A81      		ldi r26,lo8(50)
+ 808 03bc 3B81      		ldi r27,hi8(50)
+ 809 03be 2630      		ldi r30,lo8(50)
+ 810 03c0 3105      		ldi r31,hi8(50)
+ 811 03c2 01F4      		ld r25,Z
+ 812 03c4 00C0      		ldi r24,lo8(-128)
+ 813 03c6 8A81      		eor r24,r25
+ 814 03c8 9B81      		st X,r24
+ 816 03cc 9105      	.LM68:
+ 817 03ce 04F4      		rjmp .L48
+ 818 03d0 00C0      	.L41:
+ 820 03d4 3B81      	.LM69:
+ 821 03d6 2730      		ldi r26,lo8(50)
+ 822 03d8 3105      		ldi r27,hi8(50)
+ 823 03da 01F0      		ldi r30,lo8(50)
+ 824 03dc 8A81      		ldi r31,hi8(50)
+ 825 03de 9B81      		ld r25,Z
+ 826 03e0 8830      		ldi r24,lo8(64)
+ 827 03e2 9105      		eor r24,r25
+ 828 03e4 01F0      		st X,r24
+ 830               	.LM70:
+ 120:lib/mct_fct.c **** 	{
+ 121:lib/mct_fct.c **** 		case 4:
+ 122:lib/mct_fct.c **** 			PORTD = PORTD ^ 0x80;
+ 831               	:
+ 832               		ldi r26,lo8(50)
+ 833 03e8 A2E3      		ldi r27,hi8(50)
+ 834 03ea B0E0      		ldi r30,lo8(50)
+ 835 03ec E2E3      		ldi r31,hi8(50)
+ 836 03ee F0E0      		ld r25,Z
+ 837 03f0 9081      		ldi r24,lo8(32)
+ 838 03f2 80E8      		eor r24,r25
+ 839 03f4 8927      		st X,r24
+ 123:lib/mct_fct.c **** 			break;
+ 841               	mp .L48
+ 842               	.L39:
+ 844               	.LM73:
+ 124:lib/mct_fct.c **** 		case 3:
+ 125:lib/mct_fct.c **** 			PORTD = PORTD ^ 0x40;
+ 845               	 r26,lo8(50)
+ 846               		ldi r27,hi8(50)
+ 847 03fa A2E3      		ldi r30,lo8(50)
+ 848 03fc B0E0      		ldi r31,hi8(50)
+ 849 03fe E2E3      		ld r25,Z
+ 850 0400 F0E0      		ldi r24,lo8(16)
+ 851 0402 9081      		eor r24,r25
+ 852 0404 80E4      		st X,r24
+ 854 0408 8C93      	.LM74:
+ 126:lib/mct_fct.c **** 			break;
+ 855               	
+ 856               	.L46:
+ 858               	.LM75:
+ 127:lib/mct_fct.c **** 		case 2:
+ 128:lib/mct_fct.c **** 			PORTD = PORTD ^ 0x20;
+ 859               	i r26,lo8(56)
+ 860               		ldi r27,hi8(56)
+ 861 040c A2E3      		ldi r30,lo8(56)
+ 862 040e B0E0      		ldi r31,hi8(56)
+ 863 0410 E2E3      		ld r25,Z
+ 864 0412 F0E0      		ldi r24,lo8(8)
+ 865 0414 9081      		eor r24,r25
+ 866 0416 80E2      		st X,r24
+ 868 041a 8C93      	.LM76:
+ 129:lib/mct_fct.c **** 			break;
+ 869               	
+ 870               	.L45:
+ 872               	.LM77:
+ 130:lib/mct_fct.c **** 		case 1:
+ 131:lib/mct_fct.c **** 			PORTD = PORTD ^ 0x10;
+ 873               	i r26,lo8(56)
+ 874               		ldi r27,hi8(56)
+ 875 041e A2E3      		ldi r30,lo8(56)
+ 876 0420 B0E0      		ldi r31,hi8(56)
+ 877 0422 E2E3      		ld r25,Z
+ 878 0424 F0E0      		ldi r24,lo8(4)
+ 879 0426 9081      		eor r24,r25
+ 880 0428 80E1      		st X,r24
+ 882 042c 8C93      	.LM78:
+ 132:lib/mct_fct.c **** 			break;
+ 883               	
+ 884               	.L44:
+ 886               	.LM79:
+ 133:lib/mct_fct.c **** 		case 8:
+ 134:lib/mct_fct.c **** 			PORTB = PORTB ^ 0x08;
+ 887               	i r26,lo8(56)
+ 888               		ldi r27,hi8(56)
+ 889 0430 A8E3      		ldi r30,lo8(56)
+ 890 0432 B0E0      		ldi r31,hi8(56)
+ 891 0434 E8E3      		ld r25,Z
+ 892 0436 F0E0      		ldi r24,lo8(2)
+ 893 0438 9081      		eor r24,r25
+ 894 043a 88E0      		st X,r24
+ 896 043e 8C93      	.LM80:
+ 135:lib/mct_fct.c **** 			break;
+ 897               	
+ 898               	.L43:
+ 900               	.LM81:
+ 136:lib/mct_fct.c **** 		case 7:
+ 137:lib/mct_fct.c **** 			PORTB = PORTB ^ 0x04;
+ 901               	i r26,lo8(56)
+ 902               		ldi r27,hi8(56)
+ 903 0442 A8E3      		ldi r30,lo8(56)
+ 904 0444 B0E0      		ldi r31,hi8(56)
+ 905 0446 E8E3      		ld r25,Z
+ 906 0448 F0E0      		ldi r24,lo8(1)
+ 907 044a 9081      		eor r24,r25
+ 908 044c 84E0      		st X,r24
+ 909 044e 8927      	.L48:
+ 910 0450 8C93      	/* epilogue: frame size=3 */
+ 138:lib/mct_fct.c **** 			break;
+ 911               	3
+ 912               		in __tmp_reg__,__SREG__
+ 913 0452 00C0      		cli
+ 914               		out __SP_H__,r29
+ 139:lib/mct_fct.c **** 		case 6:
+ 140:lib/mct_fct.c **** 			PORTB = PORTB ^ 0x02;
+ 915               	 __SREG__,__tmp_reg__
+ 916               		out __SP_L__,r28
+ 917 0454 A8E3      		pop r29
+ 918 0456 B0E0      		pop r28
+ 919 0458 E8E3      		ret
+ 920 045a F0E0      	/* epilogue end (size=9) */
+ 921 045c 9081      	/* function toggle_out_pin size 146 (127) */
+ 923 0460 8927      	.Lscope8:
+ 141:lib/mct_fct.c **** 			break;
+ 925               	:p(0,11)",160,0,0,1
+ 926               	.global	set_out_ports
+ 928               	set_out_ports:
+ 142:lib/mct_fct.c **** 		case 5:
+ 143:lib/mct_fct.c **** 			PORTB = PORTB ^ 0x01;
+ 929               	abn	68,0,149,.LM82-set_out_ports
+ 930               	.LM82:
+ 931 0466 A8E3      	/* prologue: frame size=1 */
+ 932 0468 B0E0      		push r28
+ 933 046a E8E3      		push r29
+ 934 046c F0E0      		in r28,__SP_L__
+ 935 046e 9081      		in r29,__SP_H__
+ 936 0470 81E0      		sbiw r28,1
+ 937 0472 8927      		in __tmp_reg__,__SREG__
+ 938 0474 8C93      		cli
+ 939               		out __SP_H__,r29
+ 940               		out __SREG__,__tmp_reg__
+ 941 0476 2396      		out __SP_L__,r28
+ 942 0478 0FB6      	/* prologue end (size=10) */
+ 943 047a F894      		std Y+1,r24
+ 945 047e 0FBE      	.LM83:
+ 946 0480 CDBF      		ldd r24,Y+1
+ 947 0482 DF91      		tst r24
+ 948 0484 CF91      		brge .L50
+ 950               	.LM84:
+ 951               		ldi r24,lo8(8)
+ 952               		call set_out_pin
+ 953               		rjmp .L52
+ 954               	.L50:
+ 956               	.LM85:
+ 957               		ldi r24,lo8(8)
+ 958               		call reset_out_pin
+ 144:lib/mct_fct.c **** 			break;
+ 145:lib/mct_fct.c **** 	}
+ 146:lib/mct_fct.c **** }
+ 147:lib/mct_fct.c **** 
+ 148:lib/mct_fct.c **** void set_out_ports(unsigned char p)
+ 149:lib/mct_fct.c **** {
+ 959               	et_out_ports
+ 960               	.LM86:
+ 961               		ldd r24,Y+1
+ 962 0488 CF93      		clr r25
+ 963 048a DF93      		andi r24,lo8(64)
+ 964 048c CDB7      		andi r25,hi8(64)
+ 965 048e DEB7      		sbiw r24,0
+ 966 0490 2197      		breq .L53
+ 968 0494 F894      	.LM87:
+ 969 0496 DEBF      		ldi r24,lo8(7)
+ 970 0498 0FBE      		call set_out_pin
+ 971 049a CDBF      		rjmp .L55
+ 972               	.L53:
+ 150:lib/mct_fct.c **** 	if (p & 0x80)
+ 974               	,lo8(7)
+ 975               		call reset_out_pin
+ 976 049e 8981      	.L55:
+ 978 04a2 04F4      	.LM89:
+ 151:lib/mct_fct.c **** 		set_out_pin(8);
+ 979               	r24,Y+1
+ 980               		clr r25
+ 981 04a4 88E0      		andi r24,lo8(32)
+ 982 04a6 0E94 0000 		andi r25,hi8(32)
+ 983 04aa 00C0      		sbiw r24,0
+ 984               		breq .L56
+ 152:lib/mct_fct.c **** 	else
+ 153:lib/mct_fct.c **** 		reset_out_pin(8);
+ 985               	n	68,0,159,.LM90-set_out_ports
+ 986               	.LM90:
+ 987 04ac 88E0      		ldi r24,lo8(6)
+ 988 04ae 0E94 0000 		call set_out_pin
+ 989               		rjmp .L58
+ 154:lib/mct_fct.c **** 	if (p & 0x40)
+ 990               	
+ 992 04b2 8981      	.LM91:
+ 993 04b4 9927      		ldi r24,lo8(6)
+ 994 04b6 8074      		call reset_out_pin
+ 995 04b8 9070      	.L58:
+ 997 04bc 01F0      	.LM92:
+ 155:lib/mct_fct.c **** 		set_out_pin(7);
+ 998               	4,Y+1
+ 999               		clr r25
+ 1000 04be 87E0      		andi r24,lo8(16)
+ 1001 04c0 0E94 0000 		andi r25,hi8(16)
+ 1002 04c4 00C0      		sbiw r24,0
+ 1003               		breq .L59
+ 156:lib/mct_fct.c **** 	else
+ 157:lib/mct_fct.c **** 		reset_out_pin(7);
+ 1004               	n	68,0,163,.LM93-set_out_ports
+ 1005               	.LM93:
+ 1006 04c6 87E0      		ldi r24,lo8(5)
+ 1007 04c8 0E94 0000 		call set_out_pin
+ 1008               		rjmp .L61
+ 158:lib/mct_fct.c **** 	if (p & 0x20)
+ 1009               	
+ 1011 04cc 8981      	.LM94:
+ 1012 04ce 9927      		ldi r24,lo8(5)
+ 1013 04d0 8072      		call reset_out_pin
+ 1014 04d2 9070      	.L61:
+ 1016 04d6 01F0      	.LM95:
+ 159:lib/mct_fct.c **** 		set_out_pin(6);
+ 1017               	4,Y+1
+ 1018               		clr r25
+ 1019 04d8 86E0      		andi r24,lo8(8)
+ 1020 04da 0E94 0000 		andi r25,hi8(8)
+ 1021 04de 00C0      		sbiw r24,0
+ 1022               		breq .L62
+ 160:lib/mct_fct.c **** 	else
+ 161:lib/mct_fct.c **** 		reset_out_pin(6);
+ 1023               	n	68,0,167,.LM96-set_out_ports
+ 1024               	.LM96:
+ 1025 04e0 86E0      		ldi r24,lo8(4)
+ 1026 04e2 0E94 0000 		call set_out_pin
+ 1027               		rjmp .L64
+ 162:lib/mct_fct.c **** 	if (p & 0x10)
+ 1028               	
+ 1030 04e6 8981      	.LM97:
+ 1031 04e8 9927      		ldi r24,lo8(4)
+ 1032 04ea 8071      		call reset_out_pin
+ 1033 04ec 9070      	.L64:
+ 1035 04f0 01F0      	.LM98:
+ 163:lib/mct_fct.c **** 		set_out_pin(5);
+ 1036               	4,Y+1
+ 1037               		clr r25
+ 1038 04f2 85E0      		andi r24,lo8(4)
+ 1039 04f4 0E94 0000 		andi r25,hi8(4)
+ 1040 04f8 00C0      		sbiw r24,0
+ 1041               		breq .L65
+ 164:lib/mct_fct.c **** 	else
+ 165:lib/mct_fct.c **** 		reset_out_pin(5);
+ 1042               	n	68,0,171,.LM99-set_out_ports
+ 1043               	.LM99:
+ 1044 04fa 85E0      		ldi r24,lo8(3)
+ 1045 04fc 0E94 0000 		call set_out_pin
+ 1046               		rjmp .L67
+ 166:lib/mct_fct.c **** 	if (p & 0x08)
+ 1047               	
+ 1049 0500 8981      	.LM100:
+ 1050 0502 9927      		ldi r24,lo8(3)
+ 1051 0504 8870      		call reset_out_pin
+ 1052 0506 9070      	.L67:
+ 1054 050a 01F0      	.LM101:
+ 167:lib/mct_fct.c **** 		set_out_pin(4);
+ 1055               	4,Y+1
+ 1056               		clr r25
+ 1057 050c 84E0      		andi r24,lo8(2)
+ 1058 050e 0E94 0000 		andi r25,hi8(2)
+ 1059 0512 00C0      		sbiw r24,0
+ 1060               		breq .L68
+ 168:lib/mct_fct.c **** 	else
+ 169:lib/mct_fct.c **** 		reset_out_pin(4);
+ 1061               	n	68,0,175,.LM102-set_out_ports
+ 1062               	.LM102:
+ 1063 0514 84E0      		ldi r24,lo8(2)
+ 1064 0516 0E94 0000 		call set_out_pin
+ 1065               		rjmp .L70
+ 170:lib/mct_fct.c **** 	if (p & 0x04)
+ 1066               	
+ 1068 051a 8981      	.LM103:
+ 1069 051c 9927      		ldi r24,lo8(2)
+ 1070 051e 8470      		call reset_out_pin
+ 1071 0520 9070      	.L70:
+ 1073 0524 01F0      	.LM104:
+ 171:lib/mct_fct.c **** 		set_out_pin(3);
+ 1074               	4,Y+1
+ 1075               		clr r25
+ 1076 0526 83E0      		andi r24,lo8(1)
+ 1077 0528 0E94 0000 		andi r25,hi8(1)
+ 1078 052c 00C0      		tst r24
+ 1079               		breq .L71
+ 172:lib/mct_fct.c **** 	else
+ 173:lib/mct_fct.c **** 		reset_out_pin(3);
+ 1080               	n	68,0,179,.LM105-set_out_ports
+ 1081               	.LM105:
+ 1082 052e 83E0      		ldi r24,lo8(1)
+ 1083 0530 0E94 0000 		call set_out_pin
+ 1084               		rjmp .L74
+ 174:lib/mct_fct.c **** 	if (p & 0x02)
+ 1085               	
+ 1087 0534 8981      	.LM106:
+ 1088 0536 9927      		ldi r24,lo8(1)
+ 1089 0538 8270      		call reset_out_pin
+ 1090 053a 9070      	.L74:
+ 1091 053c 0097      	/* epilogue: frame size=1 */
+ 1092 053e 01F0      		adiw r28,1
+ 175:lib/mct_fct.c **** 		set_out_pin(2);
+ 1093               	mp_reg__,__SREG__
+ 1094               		cli
+ 1095 0540 82E0      		out __SP_H__,r29
+ 1096 0542 0E94 0000 		out __SREG__,__tmp_reg__
+ 1097 0546 00C0      		out __SP_L__,r28
+ 1098               		pop r29
+ 176:lib/mct_fct.c **** 	else
+ 177:lib/mct_fct.c **** 		reset_out_pin(2);
+ 1099               	28
+ 1100               		ret
+ 1101 0548 82E0      	/* epilogue end (size=9) */
+ 1102 054a 0E94 0000 	/* function set_out_ports size 121 (102) */
+ 178:lib/mct_fct.c **** 	if (p & 0x01)
+ 1104               	pe9:
+ 1107 0550 9927      	.global	lcd
+ 1109 0554 9070      	lcd:
+ 1111 0558 01F0      	.LM107:
+ 179:lib/mct_fct.c **** 		set_out_pin(1);
+ 1112               	gue: frame size=3 */
+ 1113               		push r28
+ 1114 055a 81E0      		push r29
+ 1115 055c 0E94 0000 		in r28,__SP_L__
+ 1116 0560 00C0      		in r29,__SP_H__
+ 1117               		sbiw r28,3
+ 180:lib/mct_fct.c **** 	else
+ 181:lib/mct_fct.c **** 		reset_out_pin(1);
+ 1118               	tmp_reg__,__SREG__
+ 1119               		cli
+ 1120 0562 81E0      		out __SP_H__,r29
+ 1121 0564 0E94 0000 		out __SREG__,__tmp_reg__
+ 1122               		out __SP_L__,r28
+ 1123               	/* prologue end (size=10) */
+ 1124 0568 2196      		std Y+1,r24
+ 1126 056c F894      	.LM108:
+ 1127 056e DEBF      		ldd r24,Y+1
+ 1128 0570 0FBE      		mov r18,r24
+ 1129 0572 CDBF      		clr r19
+ 1130 0574 DF91      		std Y+3,r19
+ 1131 0576 CF91      		std Y+2,r18
+ 1132 0578 0895      		ldd r24,Y+2
+ 1133               		ldd r25,Y+3
+ 1134               		cpi r24,4
+ 1135               		cpc r25,__zero_reg__
+ 1136               		brne .+2
+ 1137               		rjmp .L81
+ 1139               	.LM109:
+ 1140               		ldd r18,Y+2
+ 1141               		ldd r19,Y+3
+ 182:lib/mct_fct.c **** }
+ 183:lib/mct_fct.c **** 
+ 184:lib/mct_fct.c **** void lcd(char p)
+ 185:lib/mct_fct.c **** {
+ 1142               	ro_reg__
+ 1143               		brge .L87
+ 1144               		ldd r24,Y+2
+ 1145 057a CF93      		ldd r25,Y+3
+ 1146 057c DF93      		cpi r24,1
+ 1147 057e CDB7      		cpc r25,__zero_reg__
+ 1148 0580 DEB7      		breq .L78
+ 1149 0582 2397      		ldd r18,Y+2
+ 1150 0584 0FB6      		ldd r19,Y+3
+ 1151 0586 F894      		cpi r18,2
+ 1152 0588 DEBF      		cpc r19,__zero_reg__
+ 1153 058a 0FBE      		brge .L88
+ 1154 058c CDBF      		ldd r24,Y+2
+ 1155               		ldd r25,Y+3
+ 1156 058e 8983      		sbiw r24,0
+ 186:lib/mct_fct.c **** 	switch(p)
+ 1157               	p .L90
+ 1158               	.L88:
+ 1159 0590 8981      		ldd r18,Y+2
+ 1160 0592 282F      		ldd r19,Y+3
+ 1161 0594 3327      		cpi r18,2
+ 1162 0596 3B83      		cpc r19,__zero_reg__
+ 1163 0598 2A83      		breq .L79
+ 1164 059a 8A81      		ldd r24,Y+2
+ 1165 059c 9B81      		ldd r25,Y+3
+ 1166 059e 8430      		cpi r24,3
+ 1167 05a0 9105      		cpc r25,__zero_reg__
+ 1168 05a2 01F4      		breq .L80
+ 1169 05a4 00C0      		rjmp .L90
+ 1170               	.L87:
+ 1171               		ldd r18,Y+2
+ 1172 05a6 2A81      		ldd r19,Y+3
+ 1173 05a8 3B81      		cpi r18,7
+ 1174 05aa 2530      		cpc r19,__zero_reg__
+ 1175 05ac 3105      		breq .L84
+ 1176 05ae 04F4      		ldd r24,Y+2
+ 1177 05b0 8A81      		ldd r25,Y+3
+ 1178 05b2 9B81      		cpi r24,8
+ 1179 05b4 8130      		cpc r25,__zero_reg__
+ 1180 05b6 9105      		brge .L89
+ 1181 05b8 01F0      		ldd r18,Y+2
+ 1182 05ba 2A81      		ldd r19,Y+3
+ 1183 05bc 3B81      		cpi r18,5
+ 1184 05be 2230      		cpc r19,__zero_reg__
+ 1185 05c0 3105      		breq .L82
+ 1186 05c2 04F4      		ldd r24,Y+2
+ 1187 05c4 8A81      		ldd r25,Y+3
+ 1188 05c6 9B81      		cpi r24,6
+ 1189 05c8 0097      		cpc r25,__zero_reg__
+ 1190 05ca 01F0      		breq .L83
+ 1191 05cc 00C0      		rjmp .L90
+ 1192               	.L89:
+ 1193 05ce 2A81      		ldd r18,Y+2
+ 1194 05d0 3B81      		ldd r19,Y+3
+ 1195 05d2 2230      		cpi r18,8
+ 1196 05d4 3105      		cpc r19,__zero_reg__
+ 1197 05d6 01F0      		breq .L85
+ 1198 05d8 8A81      		ldd r24,Y+2
+ 1199 05da 9B81      		ldd r25,Y+3
+ 1200 05dc 8330      		cpi r24,9
+ 1201 05de 9105      		cpc r25,__zero_reg__
+ 1202 05e0 01F0      		breq .L86
+ 1203 05e2 00C0      		rjmp .L90
+ 1204               	.L77:
+ 1206 05e6 3B81      	.LM110:
+ 1207 05e8 2730      		ldi r24,lo8(-18)
+ 1208 05ea 3105      		call set_out_ports
+ 1210 05ee 8A81      	.LM111:
+ 1211 05f0 9B81      		rjmp .L90
+ 1212 05f2 8830      	.L78:
+ 1214 05f6 04F4      	.LM112:
+ 1215 05f8 2A81      		ldi r24,lo8(96)
+ 1216 05fa 3B81      		call set_out_ports
+ 1218 05fe 3105      	.LM113:
+ 1219 0600 01F0      		rjmp .L90
+ 1220 0602 8A81      	.L79:
+ 1222 0606 8630      	.LM114:
+ 1223 0608 9105      		ldi r24,lo8(-51)
+ 1224 060a 01F0      		call set_out_ports
+ 1226               	.LM115:
+ 1227 060e 2A81      		rjmp .L90
+ 1228 0610 3B81      	.L80:
+ 1230 0614 3105      	.LM116:
+ 1231 0616 01F0      		ldi r24,lo8(-23)
+ 1232 0618 8A81      		call set_out_ports
+ 1234 061c 8930      	.LM117:
+ 1235 061e 9105      		rjmp .L90
+ 1236 0620 01F0      	.L81:
+ 1238               	.LM118:
+ 187:lib/mct_fct.c **** 	{
+ 188:lib/mct_fct.c **** 		case 0:
+ 189:lib/mct_fct.c **** 			set_out_ports(0xee);
+ 1239               	0
+ 1240               	.L82:
+ 1242 0626 0E94 0000 	.LM120:
+ 190:lib/mct_fct.c **** 		break;
+ 1243               	 r24,lo8(-85)
+ 1244               		call set_out_ports
+ 1246               	.LM121:
+ 191:lib/mct_fct.c **** 		case 1:
+ 192:lib/mct_fct.c **** 			set_out_ports(0x60);
+ 1247               	p .L90
+ 1248               	.L83:
+ 1250 062e 0E94 0000 	.LM122:
+ 193:lib/mct_fct.c **** 		break;
+ 1251               	 r24,lo8(-81)
+ 1252               		call set_out_ports
+ 1254               	.LM123:
+ 194:lib/mct_fct.c **** 		case 2:
+ 195:lib/mct_fct.c **** 			set_out_ports(0xcd);
+ 1255               	p .L90
+ 1256               	.L84:
+ 1258 0636 0E94 0000 	.LM124:
+ 196:lib/mct_fct.c **** 		break;
+ 1259               	 r24,lo8(-32)
+ 1260               		call set_out_ports
+ 1262               	.LM125:
+ 197:lib/mct_fct.c **** 		case 3:
+ 198:lib/mct_fct.c **** 			set_out_ports(0xe9);
+ 1263               	p .L90
+ 1264               	.L85:
+ 1266 063e 0E94 0000 	.LM126:
+ 199:lib/mct_fct.c **** 		break;
+ 1267               	 r24,lo8(-17)
+ 1268               		call set_out_ports
+ 1270               	.LM127:
+ 200:lib/mct_fct.c **** 		case 4:
+ 201:lib/mct_fct.c **** 			set_out_ports(0x63);
+ 1271               	p .L90
+ 1272               	.L86:
+ 1274 0646 0E94 0000 	.LM128:
+ 202:lib/mct_fct.c **** 		break;
+ 1275               	 r24,lo8(-21)
+ 1276               		call set_out_ports
+ 1277 064a 00C0      	.L90:
+ 1278               	/* epilogue: frame size=3 */
+ 203:lib/mct_fct.c **** 		case 5:
+ 204:lib/mct_fct.c **** 			set_out_ports(0xab);
+ 1279               	w r28,3
+ 1280               		in __tmp_reg__,__SREG__
+ 1281 064c 8BEA      		cli
+ 1282 064e 0E94 0000 		out __SP_H__,r29
+ 205:lib/mct_fct.c **** 		break;
+ 1283               	 __SREG__,__tmp_reg__
+ 1284               		out __SP_L__,r28
+ 1285 0652 00C0      		pop r29
+ 1286               		pop r28
+ 206:lib/mct_fct.c **** 		case 6:
+ 207:lib/mct_fct.c **** 			set_out_ports(0xaf);
+ 1287               	
+ 1288               	/* epilogue end (size=9) */
+ 1289 0654 8FEA      	/* function lcd size 137 (118) */
+ 208:lib/mct_fct.c **** 		break;
+ 1291               	cope10:
+ 1293 065a 00C0      	.global	i
+ 1294               	.global	i
+ 209:lib/mct_fct.c **** 		case 7:
+ 210:lib/mct_fct.c **** 			set_out_ports(0xe0);
+ 1295               	ction .bss
+ 1298 065e 0E94 0000 	i:
+ 211:lib/mct_fct.c **** 		break;
+ 1299               	ip 1,0
+ 1300               	.global	time_global
+ 1301 0662 00C0      	.global	time_global
+ 212:lib/mct_fct.c **** 		case 8:
+ 213:lib/mct_fct.c **** 			set_out_ports(0xef);
+ 1303               	ze	time_global, 2
+ 1304               	time_global:
+ 1305 0664 8FEE      		.skip 2,0
+ 1306 0666 0E94 0000 	.global	speed_left
+ 214:lib/mct_fct.c **** 		break;
+ 1307               	bal	speed_left
+ 1310               	speed_left:
+ 215:lib/mct_fct.c **** 		case 9:
+ 216:lib/mct_fct.c **** 			set_out_ports(0xeb);
+ 1311               	ip 2,0
+ 1312               	.global	speed_right
+ 1313 066c 8BEE      	.global	speed_right
+ 1316               	speed_right:
+ 1317 0672 2396      		.skip 2,0
+ 1318 0674 0FB6      	.global	left_motor
+ 1319 0676 F894      	.global	left_motor
+ 1322 067c CDBF      	left_motor:
+ 1323 067e DF91      		.skip 1,0
+ 1324 0680 CF91      	.global	right_motor
+ 1325 0682 0895      	.global	right_motor
+ 1328               	right_motor:
+ 1329               		.skip 1,0
+ 1330               	.global	left_trigger
+ 1331               	.global	left_trigger
+ 1334               	left_trigger:
+ 1335               		.skip 1,0
+ 1336               	.global	right_trigger
+ 1337 0000 00        	.global	right_trigger
+ 1340               	right_trigger:
+ 1341               		.skip 1,0
+ 1342               	.global	left_infra
+ 1343 0001 0000      	.global	left_infra
+ 1346               	left_infra:
+ 1347               		.skip 1,0
+ 1348               	.global	right_infra
+ 1349 0003 0000      	.global	right_infra
+ 1352               	right_infra:
+ 1353               		.skip 1,0
+ 1354               	.global	left_line
+ 1355 0005 0000      		.data
+ 1358               	left_line:
+ 1359               		.word	700
+ 1360               	.global	right_line
+ 1363               	right_line:
+ 1364               		.word	700
+ 1365               	.global	battery_state_pre
+ 1366               	.global	battery_state_pre
+ 1367 0008 00        		.section .bss
+ 1370               	battery_state_pre:
+ 1371               		.skip 2,0
+ 1372               	.global	ad_pin
+ 1373 0009 00        	.global	ad_pin
+ 1376               	ad_pin:
+ 1377               		.skip 1,0
+ 1378               	.global	battery_state
+ 1379 000a 00        	.global	battery_state
+ 1382               	battery_state:
+ 1383               		.skip 2,0
+ 1384               	.global	sensor_fct
+ 1385 000b 00        	.global	sensor_fct
+ 1388               	sensor_fct:
+ 1389               		.skip 1,0
+ 1390               	.global	brght_left
+ 1391 000c 00        	.global	brght_left
+ 1394               	brght_left:
+ 1395               		.skip 5,0
+ 1396               	.global	brght_right
+ 1397 0000 BC02      	.global	brght_right
+ 1400               	brght_right:
+ 1401               		.skip 5,0
+ 1402 0002 BC02      	.global	battery
+ 1403               	.global	battery
+ 1406               	battery:
+ 1407               		.skip 5,0
+ 1408               	.global	i_right
+ 1409 000d 0000      	.global	i_right
+ 1412               	i_right:
+ 1413               		.skip 1,0
+ 1414               		.text
+ 1417               	.global	__vector_16
+ 1419               	__vector_16:
+ 1421 0010 0000      	.Ltext2:
+ 1423               	.LM129:
+ 1424               	/* prologue: frame size=2 */
+ 1425               		push __zero_reg__
+ 1426               		push __tmp_reg__
+ 1427 0012 00        		in __tmp_reg__,__SREG__
+ 1428               		push __tmp_reg__
+ 1429               		clr __zero_reg__
+ 1430               		push r18
+ 1431               		push r19
+ 1432               		push r24
+ 1433 0013 0000 0000 		push r25
+ 1433      00
+ 1434               		push r30
+ 1435               		push r31
+ 1436               		push r28
+ 1437               		push r29
+ 1438               		in r28,__SP_L__
+ 1439 0018 0000 0000 		in r29,__SP_H__
+ 1439      00
+ 1440               		sbiw r28,2
+ 1441               		out __SP_H__,r29
+ 1442               		out __SP_L__,r28
+ 1443               	/* prologue end (size=18) */
+ 1445 001d 0000 0000 	.LM130:
+ 1445      00
+ 1446               		lds r24,ad_pin
+ 1447               		mov r18,r24
+ 1448               		clr r19
+ 1449               		std Y+2,r19
+ 1450               		std Y+1,r18
+ 1451 0022 00        		ldd r24,Y+1
+ 1452               		ldd r25,Y+2
+ 1453               		sbiw r24,0
+ 1454               		breq .L93
+ 1456               	.LM131:
+ 1457               		ldd r18,Y+1
+ 1458               		ldd r19,Y+2
+ 1459               		cpi r18,1
+   1:lib/turbo_robo.c **** //=========================================
+   2:lib/turbo_robo.c **** //=== 	Output Pins for motorcontrol 	===
+   3:lib/turbo_robo.c **** //=========================================
+   4:lib/turbo_robo.c **** #ifndef LEFT_M_ENA_PIN
+   5:lib/turbo_robo.c **** #define LEFT_M_ENA_PIN 1					//pin for left motor enable
+   6:lib/turbo_robo.c **** #endif
+   7:lib/turbo_robo.c **** #ifndef LEFT_M_FOR_PIN
+   8:lib/turbo_robo.c **** #define LEFT_M_FOR_PIN 2					//pin for left motor forward
+   9:lib/turbo_robo.c **** #endif
+  10:lib/turbo_robo.c **** #ifndef LEFT_M_BACK_PIN
+  11:lib/turbo_robo.c **** #define LEFT_M_BACK_PIN 3					//pin for left motor backward
+  12:lib/turbo_robo.c **** #endif
+  13:lib/turbo_robo.c **** #ifndef RIGHT_M_ENA_PIN
+  14:lib/turbo_robo.c **** #define RIGHT_M_ENA_PIN 4					//pin for right motor enable
+  15:lib/turbo_robo.c **** #endif
+  16:lib/turbo_robo.c **** #ifndef RIGHT_M_FOR_PIN
+  17:lib/turbo_robo.c **** #define RIGHT_M_FOR_PIN 5					//pin for right motor forward
+  18:lib/turbo_robo.c **** #endif
+  19:lib/turbo_robo.c **** #ifndef RIGHT_M_BACK_PIN
+  20:lib/turbo_robo.c **** #define RIGHT_M_BACK_PIN 6					//pin for right motor backward
+  21:lib/turbo_robo.c **** #endif
+  22:lib/turbo_robo.c **** //=========================================
+  23:lib/turbo_robo.c **** //=== Input Pins for sensors (digital)	===
+  24:lib/turbo_robo.c **** //=========================================
+  25:lib/turbo_robo.c **** #ifndef LEFT_INFRA_PIN
+  26:lib/turbo_robo.c **** #define LEFT_INFRA_PIN 1						//pin for left infrared input
+  27:lib/turbo_robo.c **** #endif
+  28:lib/turbo_robo.c **** #ifndef RIGHT_INFRA_PIN
+  29:lib/turbo_robo.c **** #define	RIGHT_INFRA_PIN 2						//pin for right infrared input
+  30:lib/turbo_robo.c **** #endif
+  31:lib/turbo_robo.c **** #ifndef LEFT_TRIGGER_PIN
+  32:lib/turbo_robo.c **** #define	LEFT_TRIGGER_PIN 3						//pin for left trigger input
+  33:lib/turbo_robo.c **** #endif
+  34:lib/turbo_robo.c **** #ifndef RIGHT_TRIGGER_PIN
+  35:lib/turbo_robo.c **** #define	RIGHT_TRIGGER_PIN 4						//pin for right trigger input
+  36:lib/turbo_robo.c **** #endif
+  37:lib/turbo_robo.c **** 
+  38:lib/turbo_robo.c **** 
+  39:lib/turbo_robo.c **** unsigned char i = 0;						//counting var
+  40:lib/turbo_robo.c **** 	
+  41:lib/turbo_robo.c **** unsigned int time_global = 0;				//time
+  42:lib/turbo_robo.c **** 
+  43:lib/turbo_robo.c **** unsigned int speed_left = 0;				//speed for left motor
+  44:lib/turbo_robo.c **** unsigned int speed_right = 0;				//speed for right motor
+  45:lib/turbo_robo.c **** 
+  46:lib/turbo_robo.c **** unsigned char left_motor = 0;				//direction of left motor (0 stop, 1 forward, 2 backward)
+  47:lib/turbo_robo.c **** unsigned char right_motor = 0;			//direction of right motor (0 stop, 1 forward, 2 backward)
+  48:lib/turbo_robo.c **** 
+  49:lib/turbo_robo.c **** unsigned char left_trigger = 0;			//trigger left (0 open, 1 closed)
+  50:lib/turbo_robo.c **** unsigned char right_trigger = 0;			//trigger right (0 open, 1 closed)
+  51:lib/turbo_robo.c **** unsigned char left_infra = 0;				//trigger left (0 open, 1 closed)
+  52:lib/turbo_robo.c **** unsigned char right_infra = 0;			//trigger right (0 open, 1 closed)
+  53:lib/turbo_robo.c **** 
+  54:lib/turbo_robo.c **** unsigned int left_line = 700;				//left line sensor brighness
+  55:lib/turbo_robo.c **** unsigned int right_line = 700;				//right line sensor brighness
+  56:lib/turbo_robo.c **** unsigned int battery_state_pre = 0;
+  57:lib/turbo_robo.c **** 
+  58:lib/turbo_robo.c **** unsigned char ad_pin = 0;					//switching between pin 0 (AD in 1) and pin 1 (AD in 2)	 and pin 3 (A
+  59:lib/turbo_robo.c **** 
+  60:lib/turbo_robo.c **** unsigned int battery_state = 0;			//ad value for battery
+  61:lib/turbo_robo.c **** 
+  62:lib/turbo_robo.c **** unsigned char sensor_fct = 0;				//is 1 when a sensor is trigged, due this, the drive fcts are not 
+  63:lib/turbo_robo.c **** unsigned char brght_left[5] = {}; 		//string for left brightness
+  64:lib/turbo_robo.c **** unsigned char brght_right[5] = {};		//string for right brightness
+  65:lib/turbo_robo.c **** unsigned char battery[5] = {};			//string for battery voltage
+  66:lib/turbo_robo.c **** 
+  67:lib/turbo_robo.c **** unsigned char i_left, i_right = 0;		//counting var
+  68:lib/turbo_robo.c **** 
+  69:lib/turbo_robo.c **** SIGNAL (SIG_ADC)
+  70:lib/turbo_robo.c **** {
+ 1460               	s (right_line)+1,r25
+ 1461               		sts right_line,r24
+ 1463 0684 1F92      	.LM133:
+ 1464 0686 0F92      		ldi r30,lo8(37)
+ 1465 0688 0FB6      		ldi r31,hi8(37)
+ 1466 068a 0F92      		ld r24,Z
+ 1467 068c 1124      		clr r25
+ 1468 068e 2F93      		mov r25,r24
+ 1469 0690 3F93      		clr r24
+ 1470 0692 8F93      		movw r18,r24
+ 1471 0694 9F93      		lds r24,right_line
+ 1472 0696 EF93      		lds r25,(right_line)+1
+ 1473 0698 FF93      		or r24,r18
+ 1474 069a CF93      		or r25,r19
+ 1475 069c DF93      		sts (right_line)+1,r25
+ 1476 069e CDB7      		sts right_line,r24
+ 1478 06a2 2297      	.LM134:
+ 1479 06a4 DEBF      		ldi r24,lo8(1)
+ 1480 06a6 CDBF      		sts ad_pin,r24
+  71:lib/turbo_robo.c **** 	switch (ad_pin)
+ 1482               	9)
+ 1483               		ldi r31,hi8(39)
+ 1484 06a8 8091 0000 		ldi r24,lo8(65)
+ 1485 06ac 282F      		st Z,r24
+ 1487 06b0 3A83      	.LM136:
+ 1488 06b2 2983      		rjmp .L95
+ 1489 06b4 8981      	.L94:
+ 1491 06b8 0097      	.LM137:
+ 1492 06ba 01F0      		ldi r30,lo8(36)
+ 1493               		ldi r31,hi8(36)
+ 1494               		ld r24,Z
+ 1495 06bc 2981      		clr r25
+ 1496 06be 3A81      		sts (left_line)+1,r25
+ 1497 06c0 2130      		sts left_line,r24
+ 1499 06c4 01F0      	.LM138:
+ 1500 06c6 00C0      		ldi r30,lo8(37)
+ 1501               		ldi r31,hi8(37)
+  72:lib/turbo_robo.c **** 	{
+  73:lib/turbo_robo.c **** 		case 0:
+  74:lib/turbo_robo.c **** 			right_line = ADCL;
+ 1502               	mov r25,r24
+ 1503               		clr r24
+ 1504 06c8 E4E2      		movw r18,r24
+ 1505 06ca F0E0      		lds r24,left_line
+ 1506 06cc 8081      		lds r25,(left_line)+1
+ 1507 06ce 9927      		or r24,r18
+ 1508 06d0 9093 0000 		or r25,r19
+ 1509 06d4 8093 0000 		sts (left_line)+1,r25
+  75:lib/turbo_robo.c **** 			right_line |= (ADCH<<8);	
+ 1510               	t_line,r24
+ 1512 06d8 E5E2      	.LM139:
+ 1513 06da F0E0      		sts ad_pin,__zero_reg__
+ 1515 06de 9927      	.LM140:
+ 1516 06e0 982F      		ldi r30,lo8(39)
+ 1517 06e2 8827      		ldi r31,hi8(39)
+ 1518 06e4 9C01      		ldi r24,lo8(64)
+ 1519 06e6 8091 0000 		st Z,r24
+ 1520 06ea 9091 0000 	.L95:
+ 1521 06ee 822B      	/* epilogue: frame size=2 */
+ 1522 06f0 932B      		adiw r28,2
+ 1523 06f2 9093 0000 		cli
+ 1524 06f6 8093 0000 		out __SP_H__,r29
+  76:lib/turbo_robo.c **** 			ad_pin = 1;
+ 1525               	28
+ 1526               		pop r29
+ 1527 06fa 81E0      		pop r28
+ 1528 06fc 8093 0000 		pop r31
+  77:lib/turbo_robo.c **** 			ADMUX = 0x41;
+ 1529               	 r30
+ 1530               		pop r25
+ 1531 0700 E7E2      		pop r24
+ 1532 0702 F0E0      		pop r19
+ 1533 0704 81E4      		pop r18
+ 1534 0706 8083      		pop __tmp_reg__
+  78:lib/turbo_robo.c **** 			break;
+ 1535               	_SREG__,__tmp_reg__
+ 1536               		pop __tmp_reg__
+ 1537 0708 00C0      		pop __zero_reg__
+ 1538               		reti
+  79:lib/turbo_robo.c **** 		case 1:
+  80:lib/turbo_robo.c **** 			left_line = ADCL;
+ 1539               	pilogue end (size=17) */
+ 1540               	/* function __vector_16 size 115 (80) */
+ 1542 070c F0E0      	.Lscope11:
+ 1544 0710 9927      	.global	__vector_5
+ 1546 0716 8093 0000 	__vector_5:
+  81:lib/turbo_robo.c **** 			left_line |= (ADCH<<8);
+ 1547               	68,0,91,.LM141-__vector_5
+ 1548               	.LM141:
+ 1549 071a E5E2      	/* prologue: frame size=0 */
+ 1550 071c F0E0      		push __zero_reg__
+ 1551 071e 8081      		push __tmp_reg__
+ 1552 0720 9927      		in __tmp_reg__,__SREG__
+ 1553 0722 982F      		push __tmp_reg__
+ 1554 0724 8827      		clr __zero_reg__
+ 1555 0726 9C01      		push r24
+ 1556 0728 8091 0000 		push r25
+ 1557 072c 9091 0000 		push r28
+ 1558 0730 822B      		push r29
+ 1559 0732 932B      		in r28,__SP_L__
+ 1560 0734 9093 0000 		in r29,__SP_H__
+ 1561 0738 8093 0000 	/* prologue end (size=11) */
+  82:lib/turbo_robo.c **** 			ad_pin = 0;
+ 1562               	,.LM142-__vector_5
+ 1563               	.LM142:
+ 1564 073c 1092 0000 		lds r24,time_global
+  83:lib/turbo_robo.c **** 			ADMUX = 0x40;
+ 1565               	s r25,(time_global)+1
+ 1566               		adiw r24,1
+ 1567 0740 E7E2      		sts (time_global)+1,r25
+ 1568 0742 F0E0      		sts time_global,r24
+ 1569 0744 80E4      	/* epilogue: frame size=0 */
+ 1570 0746 8083      		pop r29
+ 1571               		pop r28
+ 1572               		pop r25
+ 1573 0748 2296      		pop r24
+ 1574 074a F894      		pop __tmp_reg__
+ 1575 074c DEBF      		out __SREG__,__tmp_reg__
+ 1576 074e CDBF      		pop __tmp_reg__
+ 1577 0750 DF91      		pop __zero_reg__
+ 1578 0752 CF91      		reti
+ 1579 0754 FF91      	/* epilogue end (size=9) */
+ 1580 0756 EF91      	/* function __vector_5 size 29 (9) */
+ 1582 075a 8F91      	.Lscope12:
+ 1584 075e 2F91      	.global	__vector_11
+ 1586 0762 0FBE      	__vector_11:
+ 1588 0766 1F90      	.LM143:
+ 1589 0768 1895      	/* prologue: frame size=4 */
+ 1590               		push __zero_reg__
+ 1591               		push __tmp_reg__
+ 1592               		in __tmp_reg__,__SREG__
+ 1593               		push __tmp_reg__
+ 1594               		clr __zero_reg__
+ 1595               		push r18
+ 1596               		push r19
+ 1597               		push r20
+  84:lib/turbo_robo.c **** 			break;
+  85:lib/turbo_robo.c **** 		default:
+  86:lib/turbo_robo.c **** 			break;
+  87:lib/turbo_robo.c **** 	}
+  88:lib/turbo_robo.c **** }
+  89:lib/turbo_robo.c **** 
+  90:lib/turbo_robo.c **** SIGNAL (SIG_OVERFLOW2)
+  91:lib/turbo_robo.c **** {
+ 1598               	sh r24
+ 1599               		push r25
+ 1600               		push r26
+ 1601 076a 1F92      		push r27
+ 1602 076c 0F92      		push r30
+ 1603 076e 0FB6      		push r31
+ 1604 0770 0F92      		push r28
+ 1605 0772 1124      		push r29
+ 1606 0774 8F93      		in r28,__SP_L__
+ 1607 0776 9F93      		in r29,__SP_H__
+ 1608 0778 CF93      		sbiw r28,4
+ 1609 077a DF93      		out __SP_H__,r29
+ 1610 077c CDB7      		out __SP_L__,r28
+ 1611 077e DEB7      	/* prologue end (size=24) */
+  92:lib/turbo_robo.c **** 	time_global++;
+ 1613               	4,i_left
+ 1614               		subi r24,lo8(-(1))
+ 1615 0780 8091 0000 		sts i_left,r24
+ 1617 0788 0196      	.LM145:
+ 1618 078a 9093 0000 		lds r24,i_right
+ 1619 078e 8093 0000 		subi r24,lo8(-(1))
+ 1620               		sts i_right,r24
+ 1622 0794 CF91      	.LM146:
+ 1623 0796 9F91      		lds r24,i_left
+ 1624 0798 8F91      		mov r18,r24
+ 1625 079a 0F90      		clr r19
+ 1626 079c 0FBE      		lds r24,speed_left
+ 1627 079e 0F90      		lds r25,(speed_left)+1
+ 1628 07a0 1F90      		cp r24,r18
+ 1629 07a2 1895      		cpc r25,r19
+ 1630               		brlo .L99
+ 1632               	.LM147:
+ 1633               		ldi r24,lo8(1)
+ 1634               		call set_out_pin
+ 1636               	.LM148:
+ 1637               		lds r24,left_motor
+  93:lib/turbo_robo.c **** }
+  94:lib/turbo_robo.c **** 
+  95:lib/turbo_robo.c **** SIGNAL (SIG_OVERFLOW0)
+  96:lib/turbo_robo.c **** {
+ 1638               	d Y+4,r19
+ 1639               		std Y+3,r18
+ 1640               		ldd r24,Y+3
+ 1641 07a4 1F92      		ldd r25,Y+4
+ 1642 07a6 0F92      		cpi r24,1
+ 1643 07a8 0FB6      		cpc r25,__zero_reg__
+ 1644 07aa 0F92      		breq .L103
+ 1645 07ac 1124      		ldd r18,Y+3
+ 1646 07ae 2F93      		ldd r19,Y+4
+ 1647 07b0 3F93      		cpi r18,2
+ 1648 07b2 4F93      		cpc r19,__zero_reg__
+ 1649 07b4 5F93      		breq .L104
+ 1650 07b6 6F93      		ldd r24,Y+3
+ 1651 07b8 7F93      		ldd r25,Y+4
+ 1652 07ba 8F93      		sbiw r24,0
+ 1653 07bc 9F93      		breq .L102
+ 1654 07be AF93      		rjmp .L105
+ 1655 07c0 BF93      	.L102:
+ 1657 07c4 FF93      	.LM149:
+ 1658 07c6 CF93      		ldi r24,lo8(2)
+ 1659 07c8 DF93      		call reset_out_pin
+ 1661 07cc DEB7      	.LM150:
+ 1662 07ce 2497      		ldi r24,lo8(3)
+ 1663 07d0 DEBF      		call reset_out_pin
+ 1665               	.LM151:
+  97:lib/turbo_robo.c **** 	i_left++;
+ 1666               	8,0,114,.LM152-__vector_11
+ 1667               	.LM152:
+ 1668 07d4 8091 0000 		ldi r24,lo8(2)
+ 1669 07d8 8F5F      		call set_out_pin
+  98:lib/turbo_robo.c **** 	i_right++;
+ 1671               	3:
+ 1672               		ldi r24,lo8(3)
+ 1673 07de 8091 0000 		call reset_out_pin
+ 1675 07e4 8093 0000 	.LM154:
+  99:lib/turbo_robo.c **** 	
+ 100:lib/turbo_robo.c **** 	if (i_left <= speed_left)
+ 1676               	 .L105
+ 1677               	.L104:
+ 1679 07ec 282F      	.LM155:
+ 1680 07ee 3327      		ldi r24,lo8(2)
+ 1681 07f0 8091 0000 		call reset_out_pin
+ 1683 07f8 8217      	.LM156:
+ 1684 07fa 9307      		ldi r24,lo8(3)
+ 1685 07fc 00F0      		call set_out_pin
+ 101:lib/turbo_robo.c **** 	{
+ 102:lib/turbo_robo.c **** 		set_out_pin(LEFT_M_ENA_PIN);
+ 1686               	5
+ 1687               	.L99:
+ 1689 0800 0E94 0000 	.LM157:
+ 103:lib/turbo_robo.c **** 		
+ 104:lib/turbo_robo.c **** 		switch (left_motor)
+ 1690               	 r24,lo8(1)
+ 1691               		call reset_out_pin
+ 1692 0804 8091 0000 	.L105:
+ 1694 080a 3327      	.LM158:
+ 1695 080c 3C83      		lds r24,i_right
+ 1696 080e 2B83      		mov r18,r24
+ 1697 0810 8B81      		clr r19
+ 1698 0812 9C81      		lds r24,speed_right
+ 1699 0814 8130      		lds r25,(speed_right)+1
+ 1700 0816 9105      		cp r24,r18
+ 1701 0818 01F0      		cpc r25,r19
+ 1702 081a 2B81      		brlo .L106
+ 1704 081e 2230      	.LM159:
+ 1705 0820 3105      		ldi r24,lo8(4)
+ 1706 0822 01F0      		call set_out_pin
+ 1708 0826 9C81      	.LM160:
+ 1709 0828 0097      		lds r24,right_motor
+ 1710 082a 01F0      		mov r18,r24
+ 1711 082c 00C0      		clr r19
+ 1712               		std Y+2,r19
+ 105:lib/turbo_robo.c **** 		{
+ 106:lib/turbo_robo.c **** 			case 0:		//stop
+ 107:lib/turbo_robo.c **** 			{
+ 108:lib/turbo_robo.c **** 				reset_out_pin(LEFT_M_FOR_PIN); 		//forward
+ 1713               	+1
+ 1714               		ldd r25,Y+2
+ 1715 082e 82E0      		cpi r24,1
+ 1716 0830 0E94 0000 		cpc r25,__zero_reg__
+ 109:lib/turbo_robo.c **** 				reset_out_pin(LEFT_M_BACK_PIN); 		//backward
+ 1717               	q .L110
+ 1718               		ldd r18,Y+1
+ 1719 0834 83E0      		ldd r19,Y+2
+ 1720 0836 0E94 0000 		cpi r18,2
+ 110:lib/turbo_robo.c **** 				break;
+ 1721               	 r19,__zero_reg__
+ 1722               		breq .L111
+ 1723 083a 00C0      		ldd r24,Y+1
+ 1724               		ldd r25,Y+2
+ 111:lib/turbo_robo.c **** 			}
+ 112:lib/turbo_robo.c **** 			case 1:		//drive forward
+ 113:lib/turbo_robo.c **** 			{
+ 114:lib/turbo_robo.c **** 				set_out_pin(LEFT_M_FOR_PIN); 		//forward
+ 1725               	w r24,0
+ 1726               		breq .L109
+ 1727 083c 82E0      		rjmp .L112
+ 1728 083e 0E94 0000 	.L109:
+ 115:lib/turbo_robo.c **** 				reset_out_pin(LEFT_M_BACK_PIN); 		//backward
+ 1729               	abn	68,0,141,.LM161-__vector_11
+ 1730               	.LM161:
+ 1731 0842 83E0      		ldi r24,lo8(5)
+ 1732 0844 0E94 0000 		call reset_out_pin
+ 116:lib/turbo_robo.c **** 				break;
+ 1733               	abn	68,0,142,.LM162-__vector_11
+ 1734               	.LM162:
+ 1735 0848 00C0      		ldi r24,lo8(6)
+ 1736               		call reset_out_pin
+ 117:lib/turbo_robo.c **** 			}
+ 118:lib/turbo_robo.c **** 			case 2:		//drive backward
+ 119:lib/turbo_robo.c **** 			{
+ 120:lib/turbo_robo.c **** 				reset_out_pin(LEFT_M_FOR_PIN); 		//forward
+ 1737               	abn	68,0,143,.LM163-__vector_11
+ 1738               	.LM163:
+ 1739 084a 82E0      		rjmp .L112
+ 1740 084c 0E94 0000 	.L110:
+ 121:lib/turbo_robo.c **** 				set_out_pin(LEFT_M_BACK_PIN); 		//backward
+ 1741               	abn	68,0,147,.LM164-__vector_11
+ 1742               	.LM164:
+ 1743 0850 83E0      		ldi r24,lo8(5)
+ 1744 0852 0E94 0000 		call set_out_pin
+ 1746               	.LM165:
+ 122:lib/turbo_robo.c **** 				break;
+ 123:lib/turbo_robo.c **** 			}
+ 124:lib/turbo_robo.c **** 			default:
+ 125:lib/turbo_robo.c **** 				break;
+ 126:lib/turbo_robo.c **** 		}
+ 127:lib/turbo_robo.c **** 	}
+ 128:lib/turbo_robo.c **** 	else
+ 129:lib/turbo_robo.c **** 	{
+ 130:lib/turbo_robo.c **** 		reset_out_pin(LEFT_M_ENA_PIN); 		//enabled
+ 1747               	24,lo8(6)
+ 1748               		call reset_out_pin
+ 1750 085a 0E94 0000 	.LM166:
+ 1751               		rjmp .L112
+ 131:lib/turbo_robo.c **** 	}
+ 132:lib/turbo_robo.c **** 
+ 133:lib/turbo_robo.c **** 	if (i_right <= speed_right)
+ 1752               	:
+ 1754 085e 8091 0000 	.LM167:
+ 1755 0862 282F      		ldi r24,lo8(5)
+ 1756 0864 3327      		call reset_out_pin
+ 1758 086a 9091 0000 	.LM168:
+ 1759 086e 8217      		ldi r24,lo8(6)
+ 1760 0870 9307      		call set_out_pin
+ 1761 0872 00F0      		rjmp .L112
+ 134:lib/turbo_robo.c **** 	{
+ 135:lib/turbo_robo.c **** 		set_out_pin(RIGHT_M_ENA_PIN);
+ 1762               	tabn	68,0,163,.LM169-__vector_11
+ 1763               	.LM169:
+ 1764 0874 84E0      		ldi r24,lo8(4)
+ 1765 0876 0E94 0000 		call reset_out_pin
+ 136:lib/turbo_robo.c **** 		
+ 137:lib/turbo_robo.c **** 		switch (right_motor)
+ 1766               	2:
+ 1768 087a 8091 0000 	.LM170:
+ 1769 087e 282F      		lds r24,i_left
+ 1770 0880 3327      		cpi r24,lo8(101)
+ 1771 0882 3A83      		brne .L113
+ 1773 0886 8981      	.LM171:
+ 1774 0888 9A81      		sts i_left,__zero_reg__
+ 1775 088a 8130      	.L113:
+ 1777 088e 01F0      	.LM172:
+ 1778 0890 2981      		lds r24,i_right
+ 1779 0892 3A81      		cpi r24,lo8(101)
+ 1780 0894 2230      		brne .L115
+ 1782 0898 01F0      	.LM173:
+ 1783 089a 8981      		sts i_right,__zero_reg__
+ 1784 089c 9A81      	.L115:
+ 1786 08a0 01F0      	.LM174:
+ 1787 08a2 00C0      		ldi r24,lo8(1)
+ 1788               		call get_in_pin
+ 138:lib/turbo_robo.c **** 		{
+ 139:lib/turbo_robo.c **** 			case 0:		//stop
+ 140:lib/turbo_robo.c **** 			{
+ 141:lib/turbo_robo.c **** 				reset_out_pin(RIGHT_M_FOR_PIN); 		//forward
+ 1789               	tabn	68,0,176,.LM175-__vector_11
+ 1790               	.LM175:
+ 1791 08a4 85E0      		ldi r24,lo8(2)
+ 1792 08a6 0E94 0000 		call get_in_pin
+ 142:lib/turbo_robo.c **** 				reset_out_pin(RIGHT_M_BACK_PIN); 		//backward
+ 1793               	 right_infra,r24
+ 1795 08aa 86E0      	.LM176:
+ 1796 08ac 0E94 0000 		ldi r24,lo8(3)
+ 143:lib/turbo_robo.c **** 				break;
+ 1797               	l get_in_pin
+ 1798               		sts left_trigger,r24
+ 1800               	.LM177:
+ 144:lib/turbo_robo.c **** 			}
+ 145:lib/turbo_robo.c **** 			case 1:		//drive forward
+ 146:lib/turbo_robo.c **** 			{
+ 147:lib/turbo_robo.c **** 				set_out_pin(RIGHT_M_FOR_PIN); 		//forward
+ 1801               	 r24,lo8(4)
+ 1802               		call get_in_pin
+ 1803 08b2 85E0      		sts right_trigger,r24
+ 1804 08b4 0E94 0000 	/* epilogue: frame size=4 */
+ 148:lib/turbo_robo.c **** 				reset_out_pin(RIGHT_M_BACK_PIN); 		//backward
+ 1805               	w r28,4
+ 1806               		cli
+ 1807 08b8 86E0      		out __SP_H__,r29
+ 1808 08ba 0E94 0000 		out __SP_L__,r28
+ 149:lib/turbo_robo.c **** 				break;
+ 1809               	 r29
+ 1810               		pop r28
+ 1811 08be 00C0      		pop r31
+ 1812               		pop r30
+ 150:lib/turbo_robo.c **** 			}
+ 151:lib/turbo_robo.c **** 			case 2:		//drive backward
+ 152:lib/turbo_robo.c **** 			{
+ 153:lib/turbo_robo.c **** 				reset_out_pin(RIGHT_M_FOR_PIN); 		//forward
+ 1813               	 r27
+ 1814               		pop r26
+ 1815 08c0 85E0      		pop r25
+ 1816 08c2 0E94 0000 		pop r24
+ 154:lib/turbo_robo.c **** 				set_out_pin(RIGHT_M_BACK_PIN); 		//backward
+ 1817               	 r23
+ 1818               		pop r22
+ 1819 08c6 86E0      		pop r21
+ 1820 08c8 0E94 0000 		pop r20
+ 1821 08cc 00C0      		pop r19
+ 1822               		pop r18
+ 155:lib/turbo_robo.c **** 				break;
+ 156:lib/turbo_robo.c **** 			}
+ 157:lib/turbo_robo.c **** 			default:
+ 158:lib/turbo_robo.c **** 				break;
+ 159:lib/turbo_robo.c **** 		}
+ 160:lib/turbo_robo.c **** 	}
+ 161:lib/turbo_robo.c **** 	else
+ 162:lib/turbo_robo.c **** 	{
+ 163:lib/turbo_robo.c **** 		reset_out_pin(RIGHT_M_ENA_PIN); 		//enabled
+ 1823               	_tmp_reg__
+ 1824               		out __SREG__,__tmp_reg__
+ 1825 08ce 84E0      		pop __tmp_reg__
+ 1826 08d0 0E94 0000 		pop __zero_reg__
+ 1827               		reti
+ 164:lib/turbo_robo.c **** 	}
+ 165:lib/turbo_robo.c **** 	
+ 166:lib/turbo_robo.c **** 	if (i_left == 101)
+ 1828               	ilogue end (size=23) */
+ 1829               	/* function __vector_11 size 207 (160) */
+ 1831 08d8 8536      	.Lscope13:
+ 167:lib/turbo_robo.c **** 	{
+ 168:lib/turbo_robo.c **** 		i_left = 0;
+ 1833               	al	init_timer
+ 1835 08dc 1092 0000 	init_timer:
+ 169:lib/turbo_robo.c **** 	}
+ 170:lib/turbo_robo.c **** 	if (i_right == 101)
+ 1837               	78:
+ 1838               	/* prologue: frame size=0 */
+ 1839 08e0 8091 0000 		push r28
+ 1840 08e4 8536      		push r29
+ 1841 08e6 01F4      		in r28,__SP_L__
+ 171:lib/turbo_robo.c **** 	{
+ 172:lib/turbo_robo.c **** 		i_right = 0;
+ 1842               	29,__SP_H__
+ 1843               	/* prologue end (size=4) */
+ 1845               	.LM179:
+ 173:lib/turbo_robo.c **** 	}
+ 174:lib/turbo_robo.c **** 	
+ 175:lib/turbo_robo.c **** 	left_infra = get_in_pin(LEFT_INFRA_PIN);
+ 1846               	 r30,lo8(68)
+ 1847               		ldi r31,hi8(68)
+ 1848 08ec 81E0      		st Z,__zero_reg__
+ 1850 08f2 8093 0000 	.LM180:
+ 176:lib/turbo_robo.c **** 	right_infra = get_in_pin(RIGHT_INFRA_PIN);
+ 1851               	r30,lo8(69)
+ 1852               		ldi r31,hi8(69)
+ 1853 08f6 82E0      		ldi r24,lo8(4)
+ 1854 08f8 0E94 0000 		st Z,r24
+ 177:lib/turbo_robo.c **** 	left_trigger = get_in_pin(LEFT_TRIGGER_PIN);
+ 1856               	1:
+ 1857               		ldi r30,lo8(82)
+ 1858 0900 83E0      		ldi r31,hi8(82)
+ 1859 0902 0E94 0000 		st Z,__zero_reg__
+ 178:lib/turbo_robo.c **** 	right_trigger = get_in_pin(RIGHT_TRIGGER_PIN);
+ 1861               	2:
+ 1862               		ldi r30,lo8(83)
+ 1863 090a 84E0      		ldi r31,hi8(83)
+ 1864 090c 0E94 0000 		ldi r24,lo8(2)
+ 1865 0910 8093 0000 		st Z,r24
+ 1867 0914 2496      	.LM183:
+ 1868 0916 F894      		ldi r26,lo8(89)
+ 1869 0918 DEBF      		ldi r27,hi8(89)
+ 1870 091a CDBF      		ldi r30,lo8(89)
+ 1871 091c DF91      		ldi r31,hi8(89)
+ 1872 091e CF91      		ld r24,Z
+ 1873 0920 FF91      		ori r24,lo8(65)
+ 1874 0922 EF91      		st X,r24
+ 1875 0924 BF91      	/* epilogue: frame size=0 */
+ 1876 0926 AF91      		pop r29
+ 1877 0928 9F91      		pop r28
+ 1878 092a 8F91      		ret
+ 1879 092c 7F91      	/* epilogue end (size=3) */
+ 1880 092e 6F91      	/* function init_timer size 28 (21) */
+ 1882 0932 4F91      	.Lscope14:
+ 1886 093a 0FBE      	.global	speed
+ 1888 093e 1F90      	speed:
+ 1890               	.LM184:
+ 1891               	/* prologue: frame size=8 */
+ 1892               		push r28
+ 1893               		push r29
+ 1894               		in r28,__SP_L__
+ 1895               		in r29,__SP_H__
+ 1896               		sbiw r28,8
+ 1897               		in __tmp_reg__,__SREG__
+ 179:lib/turbo_robo.c **** 	
+ 180:lib/turbo_robo.c **** }
+ 181:lib/turbo_robo.c **** 
+ 182:lib/turbo_robo.c **** void init_timer(void)
+ 183:lib/turbo_robo.c **** {
+ 1898               	__tmp_reg__
+ 1899               		out __SP_L__,r28
+ 1900               	/* prologue end (size=10) */
+ 1901 0942 CF93      		std Y+2,r25
+ 1902 0944 DF93      		std Y+1,r24
+ 1903 0946 CDB7      		std Y+4,r23
+ 1904 0948 DEB7      		std Y+3,r22
+ 184:lib/turbo_robo.c **** 	TCNT2 = 0x00;
+ 1906               		ldd r24,Y+1
+ 1907               		ldd r25,Y+2
+ 1908 094a E4E4      		tst r25
+ 1909 094c F0E0      		brge .L121
+ 185:lib/turbo_robo.c **** 	TCCR2 = 0x04;
+ 1911               	6:
+ 1912               		std Y+2,__zero_reg__
+ 1913 0950 E5E4      		std Y+1,__zero_reg__
+ 1914 0952 F0E0      	.L121:
+ 1916 0956 8083      	.LM187:
+ 186:lib/turbo_robo.c **** 	
+ 187:lib/turbo_robo.c **** 	TCNT0 = 0x00;
+ 1917               	24,Y+1
+ 1918               		ldd r25,Y+2
+ 1919 0958 E2E5      		cpi r24,11
+ 1920 095a F0E0      		cpc r25,__zero_reg__
+ 1921 095c 1082      		brlt .L123
+ 188:lib/turbo_robo.c **** 	TCCR0 = 0x02;
+ 1922               	bn	68,0,201,.LM188-speed
+ 1923               	.LM188:
+ 1924 095e E3E5      		ldi r24,lo8(10)
+ 1925 0960 F0E0      		ldi r25,hi8(10)
+ 1926 0962 82E0      		std Y+2,r25
+ 1927 0964 8083      		std Y+1,r24
+ 189:lib/turbo_robo.c **** 	
+ 190:lib/turbo_robo.c **** 	TIMSK |= 0x41;
+ 1928               	
+ 1930 0966 A9E5      	.LM189:
+ 1931 0968 B0E0      		ldd r24,Y+3
+ 1932 096a E9E5      		ldd r25,Y+4
+ 1933 096c F0E0      		tst r25
+ 1934 096e 8081      		brge .L125
+ 1936 0972 8C93      	.LM190:
+ 1937               		std Y+4,__zero_reg__
+ 1938 0974 DF91      		std Y+3,__zero_reg__
+ 1939 0976 CF91      	.L125:
+ 1941               	.LM191:
+ 1942               		ldd r24,Y+3
+ 1943               		ldd r25,Y+4
+ 1944               		cpi r24,11
+ 1945               		cpc r25,__zero_reg__
+ 1946               		brlt .L127
+ 1948               	.LM192:
+ 1949               		ldi r24,lo8(10)
+ 1950               		ldi r25,hi8(10)
+ 191:lib/turbo_robo.c **** }
+ 192:lib/turbo_robo.c **** 
+ 193:lib/turbo_robo.c **** void speed(int spd_left, int spd_right)
+ 194:lib/turbo_robo.c **** {
+ 1951               	r24
+ 1952               	.L127:
+ 1954 097a CF93      	.LM193:
+ 1955 097c DF93      		ldd r24,Y+1
+ 1956 097e CDB7      		ldd r25,Y+2
+ 1957 0980 DEB7      		std Y+6,r25
+ 1958 0982 2897      		std Y+5,r24
+ 1959 0984 0FB6      		ldd r24,Y+5
+ 1960 0986 F894      		ldd r25,Y+6
+ 1961 0988 DEBF      		cpi r24,5
+ 1962 098a 0FBE      		cpc r25,__zero_reg__
+ 1963 098c CDBF      		brne .+2
+ 1964               		rjmp .L134
+ 1965 098e 9A83      		ldd r24,Y+5
+ 1966 0990 8983      		ldd r25,Y+6
+ 1967 0992 7C83      		cpi r24,6
+ 1968 0994 6B83      		cpc r25,__zero_reg__
+ 195:lib/turbo_robo.c **** 	if (spd_left < 0)
+ 1969               	24,Y+5
+ 1970               		ldd r25,Y+6
+ 1971 0996 8981      		cpi r24,2
+ 1972 0998 9A81      		cpc r25,__zero_reg__
+ 1973 099a 9923      		brne .+2
+ 1974 099c 04F4      		rjmp .L131
+ 196:lib/turbo_robo.c **** 	{
+ 197:lib/turbo_robo.c **** 		spd_left = 0;
+ 1975               	24,Y+5
+ 1976               		ldd r25,Y+6
+ 1977 099e 1A82      		cpi r24,3
+ 1978 09a0 1982      		cpc r25,__zero_reg__
+ 1979               		brge .L141
+ 198:lib/turbo_robo.c **** 	}
+ 199:lib/turbo_robo.c **** 	if (spd_left > 10)
+ 1980               	r24,Y+5
+ 1981               		ldd r25,Y+6
+ 1982 09a2 8981      		cpi r24,1
+ 1983 09a4 9A81      		cpc r25,__zero_reg__
+ 1984 09a6 8B30      		breq .L130
+ 1985 09a8 9105      		rjmp .L129
+ 1986 09aa 04F0      	.L141:
+ 200:lib/turbo_robo.c **** 	{
+ 201:lib/turbo_robo.c **** 		spd_left = 10;
+ 1987               	4,Y+5
+ 1988               		ldd r25,Y+6
+ 1989 09ac 8AE0      		cpi r24,3
+ 1990 09ae 90E0      		cpc r25,__zero_reg__
+ 1991 09b0 9A83      		breq .L132
+ 1992 09b2 8983      		ldd r24,Y+5
+ 1993               		ldd r25,Y+6
+ 202:lib/turbo_robo.c **** 	}
+ 203:lib/turbo_robo.c **** 	if (spd_right < 0)
+ 1994               	4,4
+ 1995               		cpc r25,__zero_reg__
+ 1996 09b4 8B81      		breq .L133
+ 1997 09b6 9C81      		rjmp .L129
+ 1998 09b8 9923      	.L140:
+ 1999 09ba 04F4      		ldd r24,Y+5
+ 204:lib/turbo_robo.c **** 	{
+ 205:lib/turbo_robo.c **** 		spd_right = 0;
+ 2000               	25,Y+6
+ 2001               		cpi r24,8
+ 2002 09bc 1C82      		cpc r25,__zero_reg__
+ 2003 09be 1B82      		brne .+2
+ 2004               		rjmp .L137
+ 206:lib/turbo_robo.c **** 	}
+ 207:lib/turbo_robo.c **** 	if (spd_right > 10)
+ 2005               	r24,Y+5
+ 2006               		ldd r25,Y+6
+ 2007 09c0 8B81      		cpi r24,9
+ 2008 09c2 9C81      		cpc r25,__zero_reg__
+ 2009 09c4 8B30      		brge .L142
+ 2010 09c6 9105      		ldd r24,Y+5
+ 2011 09c8 04F0      		ldd r25,Y+6
+ 208:lib/turbo_robo.c **** 	{
+ 209:lib/turbo_robo.c **** 		spd_right = 10;
+ 2012               	4,6
+ 2013               		cpc r25,__zero_reg__
+ 2014 09ca 8AE0      		breq .L135
+ 2015 09cc 90E0      		ldd r24,Y+5
+ 2016 09ce 9C83      		ldd r25,Y+6
+ 2017 09d0 8B83      		cpi r24,7
+ 2018               		cpc r25,__zero_reg__
+ 210:lib/turbo_robo.c **** 	}
+ 211:lib/turbo_robo.c **** 
+ 212:lib/turbo_robo.c **** 	switch (spd_left)
+ 2019               	L136
+ 2020               		rjmp .L129
+ 2021 09d2 8981      	.L142:
+ 2022 09d4 9A81      		ldd r24,Y+5
+ 2023 09d6 9E83      		ldd r25,Y+6
+ 2024 09d8 8D83      		cpi r24,9
+ 2025 09da 8D81      		cpc r25,__zero_reg__
+ 2026 09dc 9E81      		brne .+2
+ 2027 09de 8530      		rjmp .L138
+ 2028 09e0 9105      		ldd r24,Y+5
+ 2029 09e2 01F4      		ldd r25,Y+6
+ 2030 09e4 00C0      		cpi r24,10
+ 2031 09e6 8D81      		cpc r25,__zero_reg__
+ 2032 09e8 9E81      		brne .+2
+ 2033 09ea 8630      		rjmp .L139
+ 2034 09ec 9105      		rjmp .L129
+ 2035 09ee 04F4      	.L130:
+ 2037 09f2 9E81      	.LM194:
+ 2038 09f4 8230      		ldi r24,lo8(12)
+ 2039 09f6 9105      		ldi r25,hi8(12)
+ 2040 09f8 01F4      		sts (speed_left)+1,r25
+ 2041 09fa 00C0      		sts speed_left,r24
+ 2043 09fe 9E81      	.LM195:
+ 2044 0a00 8330      		rjmp .L129
+ 2045 0a02 9105      	.L131:
+ 2047 0a06 8D81      	.LM196:
+ 2048 0a08 9E81      		ldi r24,lo8(20)
+ 2049 0a0a 8130      		ldi r25,hi8(20)
+ 2050 0a0c 9105      		sts (speed_left)+1,r25
+ 2051 0a0e 01F0      		sts speed_left,r24
+ 2053               	.LM197:
+ 2054 0a12 8D81      		rjmp .L129
+ 2055 0a14 9E81      	.L132:
+ 2057 0a18 9105      	.LM198:
+ 2058 0a1a 01F0      		ldi r24,lo8(30)
+ 2059 0a1c 8D81      		ldi r25,hi8(30)
+ 2060 0a1e 9E81      		sts (speed_left)+1,r25
+ 2061 0a20 8430      		sts speed_left,r24
+ 2063 0a24 01F0      	.LM199:
+ 2064 0a26 00C0      		rjmp .L129
+ 2065               	.L133:
+ 2067 0a2a 9E81      	.LM200:
+ 2068 0a2c 8830      		ldi r24,lo8(40)
+ 2069 0a2e 9105      		ldi r25,hi8(40)
+ 2070 0a30 01F4      		sts (speed_left)+1,r25
+ 2071 0a32 00C0      		sts speed_left,r24
+ 2073 0a36 9E81      	.LM201:
+ 2074 0a38 8930      		rjmp .L129
+ 2075 0a3a 9105      	.L134:
+ 2077 0a3e 8D81      	.LM202:
+ 2078 0a40 9E81      		ldi r24,lo8(50)
+ 2079 0a42 8630      		ldi r25,hi8(50)
+ 2080 0a44 9105      		sts (speed_left)+1,r25
+ 2081 0a46 01F0      		sts speed_left,r24
+ 2083 0a4a 9E81      	.LM203:
+ 2084 0a4c 8730      		rjmp .L129
+ 2085 0a4e 9105      	.L135:
+ 2087 0a52 00C0      	.LM204:
+ 2088               		ldi r24,lo8(60)
+ 2089 0a54 8D81      		ldi r25,hi8(60)
+ 2090 0a56 9E81      		sts (speed_left)+1,r25
+ 2091 0a58 8930      		sts speed_left,r24
+ 2093 0a5c 01F4      	.LM205:
+ 2094 0a5e 00C0      		rjmp .L129
+ 2095 0a60 8D81      	.L136:
+ 2097 0a64 8A30      	.LM206:
+ 2098 0a66 9105      		ldi r24,lo8(70)
+ 2099 0a68 01F4      		ldi r25,hi8(70)
+ 2100 0a6a 00C0      		sts (speed_left)+1,r25
+ 2101 0a6c 00C0      		sts speed_left,r24
+ 213:lib/turbo_robo.c **** 	{
+ 214:lib/turbo_robo.c **** 		case 1: speed_left = 12;
+ 2103               	di r25,hi8(80)
+ 2104               		sts (speed_left)+1,r25
+ 2105 0a6e 8CE0      		sts speed_left,r24
+ 2107 0a72 9093 0000 	.LM209:
+ 2108 0a76 8093 0000 		rjmp .L129
+ 215:lib/turbo_robo.c **** 				break;
+ 2109               	
+ 2111 0a7a 00C0      	.LM210:
+ 2112               		ldi r24,lo8(90)
+ 216:lib/turbo_robo.c **** 		case 2: speed_left = 20;
+ 2113               	i r25,hi8(90)
+ 2114               		sts (speed_left)+1,r25
+ 2115 0a7c 84E1      		sts speed_left,r24
+ 2117 0a80 9093 0000 	.LM211:
+ 2118 0a84 8093 0000 		rjmp .L129
+ 217:lib/turbo_robo.c **** 				break;
+ 2119               	
+ 2121 0a88 00C0      	.LM212:
+ 2122               		ldi r24,lo8(100)
+ 218:lib/turbo_robo.c **** 		case 3: speed_left = 30;
+ 2123               	i r25,hi8(100)
+ 2124               		sts (speed_left)+1,r25
+ 2125 0a8a 8EE1      		sts speed_left,r24
+ 2126 0a8c 90E0      	.L129:
+ 2128 0a92 8093 0000 	.LM213:
+ 219:lib/turbo_robo.c **** 				break;
+ 2129               	24,Y+3
+ 2130               		ldd r25,Y+4
+ 2131 0a96 00C0      		std Y+8,r25
+ 2132               		std Y+7,r24
+ 220:lib/turbo_robo.c **** 		case 4: speed_left = 40;
+ 2133               	 r24,Y+7
+ 2134               		ldd r25,Y+8
+ 2135 0a98 88E2      		cpi r24,5
+ 2136 0a9a 90E0      		cpc r25,__zero_reg__
+ 2137 0a9c 9093 0000 		brne .+2
+ 2138 0aa0 8093 0000 		rjmp .L148
+ 221:lib/turbo_robo.c **** 				break;
+ 2139               	24,Y+7
+ 2140               		ldd r25,Y+8
+ 2141 0aa4 00C0      		cpi r24,6
+ 2142               		cpc r25,__zero_reg__
+ 222:lib/turbo_robo.c **** 		case 5: speed_left = 50;
+ 2143               	e .L154
+ 2144               		ldd r24,Y+7
+ 2145 0aa6 82E3      		ldd r25,Y+8
+ 2146 0aa8 90E0      		cpi r24,2
+ 2147 0aaa 9093 0000 		cpc r25,__zero_reg__
+ 2148 0aae 8093 0000 		brne .+2
+ 223:lib/turbo_robo.c **** 				break;
+ 2149               	.L145
+ 2150               		ldd r24,Y+7
+ 2151 0ab2 00C0      		ldd r25,Y+8
+ 2152               		cpi r24,3
+ 224:lib/turbo_robo.c **** 		case 6: speed_left = 60;
+ 2153               	 r25,__zero_reg__
+ 2154               		brge .L155
+ 2155 0ab4 8CE3      		ldd r24,Y+7
+ 2156 0ab6 90E0      		ldd r25,Y+8
+ 2157 0ab8 9093 0000 		cpi r24,1
+ 2158 0abc 8093 0000 		cpc r25,__zero_reg__
+ 225:lib/turbo_robo.c **** 				break;
+ 2159               	.L144
+ 2160               		rjmp .L157
+ 2161 0ac0 00C0      	.L155:
+ 2162               		ldd r24,Y+7
+ 226:lib/turbo_robo.c **** 		case 7: speed_left = 70;
+ 2163               	 r25,Y+8
+ 2164               		cpi r24,3
+ 2165 0ac2 86E4      		cpc r25,__zero_reg__
+ 2166 0ac4 90E0      		breq .L146
+ 2167 0ac6 9093 0000 		ldd r24,Y+7
+ 2168 0aca 8093 0000 		ldd r25,Y+8
+ 227:lib/turbo_robo.c **** 				break;
+ 2169               	24,4
+ 2170               		cpc r25,__zero_reg__
+ 2171 0ace 00C0      		breq .L147
+ 2172               		rjmp .L157
+ 228:lib/turbo_robo.c **** 		case 8: speed_left = 80;
+ 2173               	4:
+ 2174               		ldd r24,Y+7
+ 2175 0ad0 80E5      		ldd r25,Y+8
+ 2176 0ad2 90E0      		cpi r24,8
+ 2177 0ad4 9093 0000 		cpc r25,__zero_reg__
+ 2178 0ad8 8093 0000 		brne .+2
+ 229:lib/turbo_robo.c **** 				break;
+ 2179               	.L151
+ 2180               		ldd r24,Y+7
+ 2181 0adc 00C0      		ldd r25,Y+8
+ 2182               		cpi r24,9
+ 230:lib/turbo_robo.c **** 		case 9: speed_left = 90;
+ 2183               	 r25,__zero_reg__
+ 2184               		brge .L156
+ 2185 0ade 8AE5      		ldd r24,Y+7
+ 2186 0ae0 90E0      		ldd r25,Y+8
+ 2187 0ae2 9093 0000 		cpi r24,6
+ 2188 0ae6 8093 0000 		cpc r25,__zero_reg__
+ 231:lib/turbo_robo.c **** 				break;
+ 2189               	.L149
+ 2190               		ldd r24,Y+7
+ 2191 0aea 00C0      		ldd r25,Y+8
+ 2192               		cpi r24,7
+ 232:lib/turbo_robo.c **** 		case 10: speed_left = 100;
+ 2193               	 r25,__zero_reg__
+ 2194               		breq .L150
+ 2195 0aec 84E6      		rjmp .L157
+ 2196 0aee 90E0      	.L156:
+ 2197 0af0 9093 0000 		ldd r24,Y+7
+ 2198 0af4 8093 0000 		ldd r25,Y+8
+ 2199               		cpi r24,9
+ 233:lib/turbo_robo.c **** 				break;
+ 234:lib/turbo_robo.c **** 	}
+ 235:lib/turbo_robo.c **** 	
+ 236:lib/turbo_robo.c **** 	switch (spd_right)
+ 2200               	5,__zero_reg__
+ 2201               		brne .+2
+ 2202 0af8 8B81      		rjmp .L152
+ 2203 0afa 9C81      		ldd r24,Y+7
+ 2204 0afc 9887      		ldd r25,Y+8
+ 2205 0afe 8F83      		cpi r24,10
+ 2206 0b00 8F81      		cpc r25,__zero_reg__
+ 2207 0b02 9885      		brne .+2
+ 2208 0b04 8530      		rjmp .L153
+ 2209 0b06 9105      		rjmp .L157
+ 2210 0b08 01F4      	.L144:
+ 2212 0b0c 8F81      	.LM214:
+ 2213 0b0e 9885      		ldi r24,lo8(12)
+ 2214 0b10 8630      		ldi r25,hi8(12)
+ 2215 0b12 9105      		sts (speed_right)+1,r25
+ 2216 0b14 04F4      		sts speed_right,r24
+ 2218 0b18 9885      	.LM215:
+ 2219 0b1a 8230      		rjmp .L157
+ 2220 0b1c 9105      	.L145:
+ 2222 0b20 00C0      	.LM216:
+ 2223 0b22 8F81      		ldi r24,lo8(20)
+ 2224 0b24 9885      		ldi r25,hi8(20)
+ 2225 0b26 8330      		sts (speed_right)+1,r25
+ 2226 0b28 9105      		sts speed_right,r24
+ 2228 0b2c 8F81      	.LM217:
+ 2229 0b2e 9885      		rjmp .L157
+ 2230 0b30 8130      	.L146:
+ 2232 0b34 01F0      	.LM218:
+ 2233 0b36 00C0      		ldi r24,lo8(30)
+ 2234               		ldi r25,hi8(30)
+ 2235 0b38 8F81      		sts (speed_right)+1,r25
+ 2236 0b3a 9885      		sts speed_right,r24
+ 2238 0b3e 9105      	.LM219:
+ 2239 0b40 01F0      		rjmp .L157
+ 2240 0b42 8F81      	.L147:
+ 2242 0b46 8430      	.LM220:
+ 2243 0b48 9105      		ldi r24,lo8(40)
+ 2244 0b4a 01F0      		ldi r25,hi8(40)
+ 2245 0b4c 00C0      		sts (speed_right)+1,r25
+ 2246               		sts speed_right,r24
+ 2248 0b50 9885      	.LM221:
+ 2249 0b52 8830      		rjmp .L157
+ 2250 0b54 9105      	.L148:
+ 2252 0b58 00C0      	.LM222:
+ 2253 0b5a 8F81      		ldi r24,lo8(50)
+ 2254 0b5c 9885      		ldi r25,hi8(50)
+ 2255 0b5e 8930      		sts (speed_right)+1,r25
+ 2256 0b60 9105      		sts speed_right,r24
+ 2258 0b64 8F81      	.LM223:
+ 2259 0b66 9885      		rjmp .L157
+ 2260 0b68 8630      	.L149:
+ 2262 0b6c 01F0      	.LM224:
+ 2263 0b6e 8F81      		ldi r24,lo8(60)
+ 2264 0b70 9885      		ldi r25,hi8(60)
+ 2265 0b72 8730      		sts (speed_right)+1,r25
+ 2266 0b74 9105      		sts speed_right,r24
+ 2268 0b78 00C0      	.LM225:
+ 2269               		rjmp .L157
+ 2270 0b7a 8F81      	.L150:
+ 2272 0b7e 8930      	.LM226:
+ 2273 0b80 9105      		ldi r24,lo8(70)
+ 2274 0b82 01F4      		ldi r25,hi8(70)
+ 2275 0b84 00C0      		sts (speed_right)+1,r25
+ 2276 0b86 8F81      		sts speed_right,r24
+ 2278 0b8a 8A30      	.LM227:
+ 2279 0b8c 9105      		rjmp .L157
+ 2280 0b8e 01F4      	.L151:
+ 2282 0b92 00C0      	.LM228:
+ 2283               		ldi r24,lo8(80)
+ 237:lib/turbo_robo.c **** 	{
+ 238:lib/turbo_robo.c **** 		case 1: speed_right = 12;
+ 2284               	29-speed
+ 2285               	.LM229:
+ 2286 0b94 8CE0      		rjmp .L157
+ 2287 0b96 90E0      	.L152:
+ 2289 0b9c 8093 0000 	.LM230:
+ 239:lib/turbo_robo.c **** 				break;
+ 2290               	24,lo8(90)
+ 2291               		ldi r25,hi8(90)
+ 2292 0ba0 00C0      		sts (speed_right)+1,r25
+ 2293               		sts speed_right,r24
+ 240:lib/turbo_robo.c **** 		case 2: speed_right = 20;
+ 2294               	abn	68,0,255,.LM231-speed
+ 2295               	.LM231:
+ 2296 0ba2 84E1      		rjmp .L157
+ 2297 0ba4 90E0      	.L153:
+ 2299 0baa 8093 0000 	.LM232:
+ 241:lib/turbo_robo.c **** 				break;
+ 2300               	24,lo8(100)
+ 2301               		ldi r25,hi8(100)
+ 2302 0bae 00C0      		sts (speed_right)+1,r25
+ 2303               		sts speed_right,r24
+ 242:lib/turbo_robo.c **** 		case 3: speed_right = 30;
+ 2304               	7:
+ 2305               	/* epilogue: frame size=8 */
+ 2306 0bb0 8EE1      		adiw r28,8
+ 2307 0bb2 90E0      		in __tmp_reg__,__SREG__
+ 2308 0bb4 9093 0000 		cli
+ 2309 0bb8 8093 0000 		out __SP_H__,r29
+ 243:lib/turbo_robo.c **** 				break;
+ 2310               	_SREG__,__tmp_reg__
+ 2311               		out __SP_L__,r28
+ 2312 0bbc 00C0      		pop r29
+ 2313               		pop r28
+ 244:lib/turbo_robo.c **** 		case 4: speed_right = 40;
+ 2314               	
+ 2315               	/* epilogue end (size=9) */
+ 2316 0bbe 88E2      	/* function speed size 357 (338) */
+ 2318 0bc2 9093 0000 	.Lscope15:
+ 245:lib/turbo_robo.c **** 				break;
+ 2320               	bs	"time:p(0,1)",160,0,0,1
+ 2321               	.global	fct_wait_ts
+ 2323               	fct_wait_ts:
+ 246:lib/turbo_robo.c **** 		case 5: speed_right = 50;
+ 2324               	abn	68,0,262,.LM233-fct_wait_ts
+ 2325               	.LM233:
+ 2326 0bcc 82E3      	/* prologue: frame size=2 */
+ 2327 0bce 90E0      		push r28
+ 2328 0bd0 9093 0000 		push r29
+ 2329 0bd4 8093 0000 		in r28,__SP_L__
+ 247:lib/turbo_robo.c **** 				break;
+ 2330               	9,__SP_H__
+ 2331               		sbiw r28,2
+ 2332 0bd8 00C0      		in __tmp_reg__,__SREG__
+ 2333               		cli
+ 248:lib/turbo_robo.c **** 		case 6: speed_right = 60;
+ 2334               	 __SP_H__,r29
+ 2335               		out __SREG__,__tmp_reg__
+ 2336 0bda 8CE3      		out __SP_L__,r28
+ 2337 0bdc 90E0      	/* prologue end (size=10) */
+ 2338 0bde 9093 0000 		std Y+2,r25
+ 2339 0be2 8093 0000 		std Y+1,r24
+ 249:lib/turbo_robo.c **** 				break;
+ 2340               	n	68,0,263,.LM234-fct_wait_ts
+ 2341               	.LM234:
+ 2342 0be6 00C0      		rjmp .L166
+ 2343               	.L160:
+ 250:lib/turbo_robo.c **** 		case 7: speed_right = 70;
+ 2344               	abn	68,0,266,.LM235-fct_wait_ts
+ 2345               	.LM235:
+ 2346 0be8 86E4      		lds r24,sensor_fct
+ 2347 0bea 90E0      		tst r24
+ 2348 0bec 9093 0000 		brne .L161
+ 2349 0bf0 8093 0000 		lds r24,left_infra
+ 251:lib/turbo_robo.c **** 				break;
+ 2350               	24
+ 2351               		breq .L165
+ 2352 0bf4 00C0      	.L161:
+ 252:lib/turbo_robo.c **** 		case 8: speed_right = 80;
+ 2354               	36:
+ 2355               		lds r24,sensor_fct
+ 2356 0bf6 80E5      		tst r24
+ 2357 0bf8 90E0      		brne .L159
+ 2358 0bfa 9093 0000 		lds r24,right_infra
+ 2359 0bfe 8093 0000 		tst r24
+ 253:lib/turbo_robo.c **** 				break;
+ 2360               	.L165
+ 2361               	.L159:
+ 2362 0c02 00C0      	.L166:
+ 254:lib/turbo_robo.c **** 		case 9: speed_right = 90;
+ 2364               	37:
+ 2365               		ldd r18,Y+1
+ 2366 0c04 8AE5      		ldd r19,Y+2
+ 2367 0c06 90E0      		movw r24,r18
+ 2368 0c08 9093 0000 		lsl r24
+ 2369 0c0c 8093 0000 		rol r25
+ 255:lib/turbo_robo.c **** 				break;
+ 2370               	24
+ 2371               		rol r25
+ 2372 0c10 00C0      		lsl r24
+ 2373               		rol r25
+ 256:lib/turbo_robo.c **** 		case 10: speed_right = 100;
+ 2374               	 r24,r18
+ 2375               		adc r25,r19
+ 2376 0c12 84E6      		ldi r18,lo8(10)
+ 2377 0c14 90E0      		ldi r19,hi8(10)
+ 2378 0c16 9093 0000 		movw r22,r18
+ 2379 0c1a 8093 0000 		call __divmodhi4
+ 2380               		movw r24,r22
+ 2381               		movw r18,r24
+ 2382 0c1e 2896      		lds r24,time_global
+ 2383 0c20 0FB6      		lds r25,(time_global)+1
+ 2384 0c22 F894      		cp r18,r24
+ 2385 0c24 DEBF      		cpc r19,r25
+ 2386 0c26 0FBE      		brsh .L160
+ 2387 0c28 CDBF      	.L165:
+ 2388 0c2a DF91      	/* epilogue: frame size=2 */
+ 2389 0c2c CF91      		adiw r28,2
+ 2390 0c2e 0895      		in __tmp_reg__,__SREG__
+ 2391               		cli
+ 2392               		out __SP_H__,r29
+ 2393               		out __SREG__,__tmp_reg__
+ 2394               		out __SP_L__,r28
+ 2395               		pop r29
+ 2396               		pop r28
+ 2397               		ret
+ 2398               	/* epilogue end (size=9) */
+ 2399               	/* function fct_wait_ts size 63 (44) */
+ 257:lib/turbo_robo.c **** 				break;
+ 258:lib/turbo_robo.c **** 	}
+ 259:lib/turbo_robo.c **** }
+ 260:lib/turbo_robo.c **** 
+ 261:lib/turbo_robo.c **** void fct_wait_ts(int time)
+ 262:lib/turbo_robo.c **** {
+ 2400               	wait_ts
+ 2401               	.Lscope16:
+ 2406 0c36 DEB7      	.global	fct_drive
+ 2408 0c3a 0FB6      	fct_drive:
+ 2410 0c3e DEBF      	.LM238:
+ 2411 0c40 0FBE      	/* prologue: frame size=6 */
+ 2412 0c42 CDBF      		push r28
+ 2413               		push r29
+ 2414 0c44 9A83      		in r28,__SP_L__
+ 2415 0c46 8983      		in r29,__SP_H__
+ 263:lib/turbo_robo.c **** 	while(time_global<=((time*9)/10))
+ 2416               	__tmp_reg__,__SREG__
+ 2417               		cli
+ 2418 0c48 00C0      		out __SP_H__,r29
+ 2419               		out __SREG__,__tmp_reg__
+ 264:lib/turbo_robo.c **** 	{
+ 265:lib/turbo_robo.c **** #ifdef LEFT_INFRA
+ 266:lib/turbo_robo.c **** 		if ((!sensor_fct) && (!left_infra))
+ 2420               	 __SP_L__,r28
+ 2421               	/* prologue end (size=10) */
+ 2422 0c4a 8091 0000 		std Y+2,r25
+ 2423 0c4e 8823      		std Y+1,r24
+ 2424 0c50 01F4      		std Y+4,r23
+ 2425 0c52 8091 0000 		std Y+3,r22
+ 2426 0c56 8823      		std Y+6,r21
+ 2427 0c58 01F0      		std Y+5,r20
+ 267:lib/turbo_robo.c **** 		{
+ 268:lib/turbo_robo.c **** 			break;
+ 269:lib/turbo_robo.c **** 		}
+ 270:lib/turbo_robo.c **** #endif
+ 271:lib/turbo_robo.c **** #ifdef RIGHT_INFRA
+ 272:lib/turbo_robo.c **** 		if ((!sensor_fct) && (!right_infra))
+ 2429               	ldd r24,Y+3
+ 2430               		ldd r25,Y+4
+ 2431 0c5a 8091 0000 		tst r25
+ 2432 0c5e 8823      		brge .L168
+ 2434 0c62 8091 0000 	.LM240:
+ 2435 0c66 8823      		ldi r24,lo8(2)
+ 2436 0c68 01F0      		sts left_motor,r24
+ 2437               	.L168:
+ 2439               	.LM241:
+ 2440               		ldd r24,Y+3
+ 2441 0c6a 2981      		ldd r25,Y+4
+ 2442 0c6c 3A81      		cp __zero_reg__,r24
+ 2443 0c6e C901      		cpc __zero_reg__,r25
+ 2444 0c70 880F      		brge .L170
+ 2446 0c74 880F      	.LM242:
+ 2447 0c76 991F      		ldi r24,lo8(1)
+ 2448 0c78 880F      		sts left_motor,r24
+ 2449 0c7a 991F      	.L170:
+ 2451 0c7e 931F      	.LM243:
+ 2452 0c80 2AE0      		ldd r24,Y+3
+ 2453 0c82 30E0      		ldd r25,Y+4
+ 2454 0c84 B901      		sbiw r24,0
+ 2455 0c86 0E94 0000 		brne .L172
+ 2457 0c8c 9C01      	.LM244:
+ 2458 0c8e 8091 0000 		sts left_motor,__zero_reg__
+ 2459 0c92 9091 0000 	.L172:
+ 2461 0c98 3907      	.LM245:
+ 2462 0c9a 00F4      		ldd r24,Y+5
+ 2463               		ldd r25,Y+6
+ 2464               		tst r25
+ 2465 0c9c 2296      		brge .L174
+ 2467 0ca0 F894      	.LM246:
+ 2468 0ca2 DEBF      		ldi r24,lo8(2)
+ 2469 0ca4 0FBE      		sts right_motor,r24
+ 2470 0ca6 CDBF      	.L174:
+ 2472 0caa CF91      	.LM247:
+ 2473 0cac 0895      		ldd r24,Y+5
+ 2474               		ldd r25,Y+6
+ 2475               		cp __zero_reg__,r24
+ 2476               		cpc __zero_reg__,r25
+ 2477               		brge .L176
+ 2479               	.LM248:
+ 2480               		ldi r24,lo8(1)
+ 2481               		sts right_motor,r24
+ 2482               	.L176:
+ 2484               	.LM249:
+ 273:lib/turbo_robo.c **** 		{
+ 274:lib/turbo_robo.c **** 			break;
+ 275:lib/turbo_robo.c **** 		}
+ 276:lib/turbo_robo.c **** #endif
+ 277:lib/turbo_robo.c **** #ifdef LEFT_TRIGGER
+ 278:lib/turbo_robo.c **** 		if ((!sensor_fct) && ((left_trigger)))
+ 279:lib/turbo_robo.c **** 		{
+ 280:lib/turbo_robo.c **** 			break;
+ 281:lib/turbo_robo.c **** 		}
+ 282:lib/turbo_robo.c **** #endif
+ 283:lib/turbo_robo.c **** #ifdef RIGHT_TRIGGER
+ 284:lib/turbo_robo.c **** 		if ((!sensor_fct) && ((right_trigger)))
+ 285:lib/turbo_robo.c **** 		{
+ 286:lib/turbo_robo.c **** 			break;
+ 287:lib/turbo_robo.c **** 		}
+ 288:lib/turbo_robo.c **** #endif
+ 289:lib/turbo_robo.c **** #ifdef LEFT_LINE
+ 290:lib/turbo_robo.c **** 		if ((!sensor_fct) && ((left_line >= LEFT_MIN) && (left_line <= LEFT_MAX)))
+ 291:lib/turbo_robo.c **** 		{
+ 292:lib/turbo_robo.c **** 			break;
+ 293:lib/turbo_robo.c **** 		}
+ 294:lib/turbo_robo.c **** #endif
+ 295:lib/turbo_robo.c **** #ifdef RIGHT_LINE
+ 296:lib/turbo_robo.c **** 		if ((!sensor_fct) && ((right_line >= RIGHT_MIN) && (right_line <= RIGHT_MAX)))
+ 297:lib/turbo_robo.c **** 		{
+ 298:lib/turbo_robo.c **** 			break;
+ 299:lib/turbo_robo.c **** 		}
+ 300:lib/turbo_robo.c **** #endif
+ 301:lib/turbo_robo.c **** 	}
+ 302:lib/turbo_robo.c **** }
+ 303:lib/turbo_robo.c **** 
+ 304:lib/turbo_robo.c **** void fct_drive(int time, int spd_left, int spd_right)
+ 305:lib/turbo_robo.c **** {
+ 2485               	n	68,0,330,.LM250-fct_drive
+ 2486               	.LM250:
+ 2487               		sts right_motor,__zero_reg__
+ 2488 0cae CF93      	.L178:
+ 2490 0cb2 CDB7      	.LM251:
+ 2491 0cb4 DEB7      		ldd r24,Y+5
+ 2492 0cb6 2697      		ldd r25,Y+6
+ 2493 0cb8 0FB6      		ldd r18,Y+3
+ 2494 0cba F894      		ldd r19,Y+4
+ 2495 0cbc DEBF      		movw r22,r24
+ 2496 0cbe 0FBE      		movw r24,r18
+ 2497 0cc0 CDBF      		call speed
+ 2499 0cc2 9A83      	.LM252:
+ 2500 0cc4 8983      		ldi r24,lo8(1)
+ 2501 0cc6 7C83      		ldi r25,hi8(1)
+ 2502 0cc8 6B83      		sts (time_global)+1,r25
+ 2503 0cca 5E83      		sts time_global,r24
+ 306:lib/turbo_robo.c **** //	Left Motor direction
+ 307:lib/turbo_robo.c **** 	if (spd_left < 0)
+ 2505               	
+ 2506               		ldd r25,Y+2
+ 2507 0cce 8B81      		call fct_wait_ts
+ 2509 0cd2 9923      	.LM254:
+ 2510 0cd4 04F4      		sts left_motor,__zero_reg__
+ 308:lib/turbo_robo.c **** 	{
+ 309:lib/turbo_robo.c **** 		left_motor = 2;
+ 2511               	bn	68,0,340,.LM255-fct_drive
+ 2512               	.LM255:
+ 2513 0cd6 82E0      		sts right_motor,__zero_reg__
+ 2514 0cd8 8093 0000 	/* epilogue: frame size=6 */
+ 2515               		adiw r28,6
+ 310:lib/turbo_robo.c **** 	}
+ 311:lib/turbo_robo.c **** 	if (spd_left > 0)
+ 2516               	_tmp_reg__,__SREG__
+ 2517               		cli
+ 2518 0cdc 8B81      		out __SP_H__,r29
+ 2519 0cde 9C81      		out __SREG__,__tmp_reg__
+ 2520 0ce0 1816      		out __SP_L__,r28
+ 2521 0ce2 1906      		pop r29
+ 2522 0ce4 04F4      		pop r28
+ 312:lib/turbo_robo.c **** 	{
+ 313:lib/turbo_robo.c **** 		left_motor = 1;
+ 2523               	 epilogue end (size=9) */
+ 2524               	/* function fct_drive size 89 (70) */
+ 2526 0ce8 8093 0000 	.Lscope17:
+ 314:lib/turbo_robo.c **** 	}
+ 315:lib/turbo_robo.c **** 	if (spd_left == 0)
+ 2528               	bs	"time:p(0,1)",160,0,0,1
+ 2530 0cec 8B81      	.global	fct_forward
+ 2532 0cf0 0097      	fct_forward:
+ 316:lib/turbo_robo.c **** 	{
+ 317:lib/turbo_robo.c **** 		left_motor = 0;
+ 2534               	:
+ 2535               	/* prologue: frame size=3 */
+ 2536 0cf4 1092 0000 		push r28
+ 2537               		push r29
+ 318:lib/turbo_robo.c **** 	}
+ 319:lib/turbo_robo.c **** //	Right Motor	direction
+ 320:lib/turbo_robo.c **** 	if (spd_right < 0)
+ 2538               	r28,__SP_L__
+ 2539               		in r29,__SP_H__
+ 2540 0cf8 8D81      		sbiw r28,3
+ 2541 0cfa 9E81      		in __tmp_reg__,__SREG__
+ 2542 0cfc 9923      		cli
+ 2543 0cfe 04F4      		out __SP_H__,r29
+ 321:lib/turbo_robo.c **** 	{
+ 322:lib/turbo_robo.c **** 		right_motor = 2;
+ 2544               	_SREG__,__tmp_reg__
+ 2545               		out __SP_L__,r28
+ 2546 0d00 82E0      	/* prologue end (size=10) */
+ 2547 0d02 8093 0000 		std Y+2,r25
+ 2548               		std Y+1,r24
+ 323:lib/turbo_robo.c **** 	}
+ 324:lib/turbo_robo.c **** 	if (spd_right > 0)
+ 2549               	Y+3,r22
+ 2551 0d06 8D81      	.LM257:
+ 2552 0d08 9E81      		ldd r24,Y+3
+ 2553 0d0a 1816      		mov r18,r24
+ 2554 0d0c 1906      		clr r19
+ 2555 0d0e 04F4      		ldd r24,Y+3
+ 325:lib/turbo_robo.c **** 	{
+ 326:lib/turbo_robo.c **** 		right_motor = 1;
+ 2556               	5
+ 2557               		movw r22,r18
+ 2558 0d10 81E0      		call speed
+ 2560               	.LM258:
+ 327:lib/turbo_robo.c **** 	}
+ 328:lib/turbo_robo.c **** 	if (spd_right == 0)
+ 2561               	r24,lo8(1)
+ 2562               		sts left_motor,r24
+ 2564 0d18 9E81      	.LM259:
+ 2565 0d1a 0097      		ldi r24,lo8(1)
+ 2566 0d1c 01F4      		sts right_motor,r24
+ 329:lib/turbo_robo.c **** 	{
+ 330:lib/turbo_robo.c **** 		right_motor = 0;
+ 2567               	n	68,0,351,.LM260-fct_forward
+ 2568               	.LM260:
+ 2569 0d1e 1092 0000 		ldi r24,lo8(1)
+ 2570               		ldi r25,hi8(1)
+ 331:lib/turbo_robo.c **** 	}
+ 332:lib/turbo_robo.c **** 	
+ 333:lib/turbo_robo.c **** 	speed(spd_left, spd_right);
+ 2571               	 (time_global)+1,r25
+ 2572               		sts time_global,r24
+ 2574 0d24 9E81      	.LM261:
+ 2575 0d26 2B81      		ldd r24,Y+1
+ 2576 0d28 3C81      		ldd r25,Y+2
+ 2577 0d2a BC01      		call fct_wait_ts
+ 2579 0d2e 0E94 0000 	.LM262:
+ 334:lib/turbo_robo.c **** 
+ 335:lib/turbo_robo.c **** 	time_global = 1;
+ 2580               	_motor,__zero_reg__
+ 2582 0d32 81E0      	.LM263:
+ 2583 0d34 90E0      		sts right_motor,__zero_reg__
+ 2584 0d36 9093 0000 	/* epilogue: frame size=3 */
+ 2585 0d3a 8093 0000 		adiw r28,3
+ 336:lib/turbo_robo.c **** 	
+ 337:lib/turbo_robo.c **** 	fct_wait_ts(time);
+ 2586               	tmp_reg__,__SREG__
+ 2587               		cli
+ 2588 0d3e 8981      		out __SP_H__,r29
+ 2589 0d40 9A81      		out __SREG__,__tmp_reg__
+ 2590 0d42 0E94 0000 		out __SP_L__,r28
+ 338:lib/turbo_robo.c **** 	
+ 339:lib/turbo_robo.c **** 	left_motor = 0;
+ 2591               	r29
+ 2592               		pop r28
+ 2593 0d46 1092 0000 		ret
+ 340:lib/turbo_robo.c **** 	right_motor = 0;
+ 2594               	epilogue end (size=9) */
+ 2595               	/* function fct_forward size 50 (31) */
+ 2597               	.Lscope18:
+ 2601 0d54 DEBF      	.global	fct_forward_left
+ 2603 0d58 CDBF      	fct_forward_left:
+ 2605 0d5c CF91      	.LM264:
+ 2606 0d5e 0895      	/* prologue: frame size=3 */
+ 2607               		push r28
+ 2608               		push r29
+ 2609               		in r28,__SP_L__
+ 2610               		in r29,__SP_H__
+ 2611               		sbiw r28,3
+ 2612               		in __tmp_reg__,__SREG__
+ 2613               		cli
+ 2614               		out __SP_H__,r29
+ 2615               		out __SREG__,__tmp_reg__
+ 2616               		out __SP_L__,r28
+ 341:lib/turbo_robo.c **** 
+ 342:lib/turbo_robo.c **** }
+ 343:lib/turbo_robo.c **** 
+ 344:lib/turbo_robo.c **** void fct_forward(int time, char spd)
+ 345:lib/turbo_robo.c **** {
+ 2617               	0) */
+ 2618               		std Y+2,r25
+ 2619               		std Y+1,r24
+ 2620 0d60 CF93      		std Y+3,r22
+ 2622 0d64 CDB7      	.LM265:
+ 2623 0d66 DEB7      		ldd r24,Y+3
+ 2624 0d68 2397      		mov r18,r24
+ 2625 0d6a 0FB6      		clr r19
+ 2626 0d6c F894      		ldd r24,Y+3
+ 2627 0d6e DEBF      		clr r25
+ 2628 0d70 0FBE      		movw r22,r18
+ 2629 0d72 CDBF      		call speed
+ 2631 0d74 9A83      	.LM266:
+ 2632 0d76 8983      		sts left_motor,__zero_reg__
+ 346:lib/turbo_robo.c **** 	speed(spd, spd);
+ 2634               	lo8(1)
+ 2635               		sts right_motor,r24
+ 2637 0d7c 282F      	.LM268:
+ 2638 0d7e 3327      		ldi r24,lo8(1)
+ 2639 0d80 8B81      		ldi r25,hi8(1)
+ 2640 0d82 9927      		sts (time_global)+1,r25
+ 2641 0d84 B901      		sts time_global,r24
+ 347:lib/turbo_robo.c **** 	
+ 348:lib/turbo_robo.c **** 	left_motor = 1;
+ 2643               	ldd r24,Y+1
+ 2644               		ldd r25,Y+2
+ 2645 0d8a 81E0      		call fct_wait_ts
+ 349:lib/turbo_robo.c **** 	right_motor = 1;
+ 2647               	70:
+ 2648               		sts left_motor,__zero_reg__
+ 2650 0d92 8093 0000 	.LM271:
+ 350:lib/turbo_robo.c **** 	
+ 351:lib/turbo_robo.c **** 	time_global = 1;
+ 2651               	 right_motor,__zero_reg__
+ 2652               	/* epilogue: frame size=3 */
+ 2653 0d96 81E0      		adiw r28,3
+ 2654 0d98 90E0      		in __tmp_reg__,__SREG__
+ 2655 0d9a 9093 0000 		cli
+ 2656 0d9e 8093 0000 		out __SP_H__,r29
+ 352:lib/turbo_robo.c **** 	
+ 353:lib/turbo_robo.c **** 	fct_wait_ts(time);
+ 2657               	_SREG__,__tmp_reg__
+ 2658               		out __SP_L__,r28
+ 2659 0da2 8981      		pop r29
+ 2660 0da4 9A81      		pop r28
+ 2661 0da6 0E94 0000 		ret
+ 354:lib/turbo_robo.c **** 	
+ 355:lib/turbo_robo.c **** 	left_motor = 0;
+ 2662               	ilogue end (size=9) */
+ 2663               	/* function fct_forward_left size 49 (30) */
+ 356:lib/turbo_robo.c **** 	right_motor = 0;
+ 2665               	cope19:
+ 2669 0db2 2396      	.global	fct_forward_right
+ 2671 0db6 F894      	fct_forward_right:
+ 2673 0dba 0FBE      	.LM272:
+ 2674 0dbc CDBF      	/* prologue: frame size=3 */
+ 2675 0dbe DF91      		push r28
+ 2676 0dc0 CF91      		push r29
+ 2677 0dc2 0895      		in r28,__SP_L__
+ 2678               		in r29,__SP_H__
+ 2679               		sbiw r28,3
+ 2680               		in __tmp_reg__,__SREG__
+ 2681               		cli
+ 2682               		out __SP_H__,r29
+ 2683               		out __SREG__,__tmp_reg__
+ 2684               		out __SP_L__,r28
+ 2685               	/* prologue end (size=10) */
+ 2686               		std Y+2,r25
+ 2687               		std Y+1,r24
+ 357:lib/turbo_robo.c **** }
+ 358:lib/turbo_robo.c **** 
+ 359:lib/turbo_robo.c **** void fct_forward_left(int time, char spd)
+ 360:lib/turbo_robo.c **** {
+ 2688               	,0,376,.LM273-fct_forward_right
+ 2689               	.LM273:
+ 2690               		ldd r24,Y+3
+ 2691 0dc4 CF93      		mov r18,r24
+ 2692 0dc6 DF93      		clr r19
+ 2693 0dc8 CDB7      		ldd r24,Y+3
+ 2694 0dca DEB7      		clr r25
+ 2695 0dcc 2397      		movw r22,r18
+ 2696 0dce 0FB6      		call speed
+ 2698 0dd2 DEBF      	.LM274:
+ 2699 0dd4 0FBE      		ldi r24,lo8(1)
+ 2700 0dd6 CDBF      		sts left_motor,r24
+ 2702 0dd8 9A83      	.LM275:
+ 2703 0dda 8983      		sts right_motor,__zero_reg__
+ 361:lib/turbo_robo.c **** 	speed(spd, spd);
+ 2705               	lo8(1)
+ 2706               		ldi r25,hi8(1)
+ 2707 0dde 8B81      		sts (time_global)+1,r25
+ 2708 0de0 282F      		sts time_global,r24
+ 2710 0de4 8B81      	.LM277:
+ 2711 0de6 9927      		ldd r24,Y+1
+ 2712 0de8 B901      		ldd r25,Y+2
+ 2713 0dea 0E94 0000 		call fct_wait_ts
+ 362:lib/turbo_robo.c **** 
+ 363:lib/turbo_robo.c **** 	left_motor = 0;
+ 2714               	8,0,385,.LM278-fct_forward_right
+ 2715               	.LM278:
+ 2716 0dee 1092 0000 		sts left_motor,__zero_reg__
+ 364:lib/turbo_robo.c **** 	right_motor = 1;
+ 2717               	tabn	68,0,386,.LM279-fct_forward_right
+ 2718               	.LM279:
+ 2719 0df2 81E0      		sts right_motor,__zero_reg__
+ 2720 0df4 8093 0000 	/* epilogue: frame size=3 */
+ 365:lib/turbo_robo.c **** 	
+ 366:lib/turbo_robo.c **** 	time_global = 1;
+ 2721               	w r28,3
+ 2722               		in __tmp_reg__,__SREG__
+ 2723 0df8 81E0      		cli
+ 2724 0dfa 90E0      		out __SP_H__,r29
+ 2725 0dfc 9093 0000 		out __SREG__,__tmp_reg__
+ 2726 0e00 8093 0000 		out __SP_L__,r28
+ 367:lib/turbo_robo.c **** 
+ 368:lib/turbo_robo.c **** 	fct_wait_ts(time);
+ 2727               	29
+ 2728               		pop r28
+ 2729 0e04 8981      		ret
+ 2730 0e06 9A81      	/* epilogue end (size=9) */
+ 2731 0e08 0E94 0000 	/* function fct_forward_right size 49 (30) */
+ 369:lib/turbo_robo.c **** 
+ 370:lib/turbo_robo.c **** 	left_motor = 0;
+ 2732               	e	fct_forward_right, .-fct_forward_right
+ 2733               	.Lscope20:
+ 371:lib/turbo_robo.c **** 	right_motor = 0;
+ 2735               	tabs	"time:p(0,1)",160,0,0,1
+ 2737 0e10 1092 0000 	.global	fct_backward
+ 2739 0e14 2396      	fct_backward:
+ 2741 0e18 F894      	.LM280:
+ 2742 0e1a DEBF      	/* prologue: frame size=3 */
+ 2743 0e1c 0FBE      		push r28
+ 2744 0e1e CDBF      		push r29
+ 2745 0e20 DF91      		in r28,__SP_L__
+ 2746 0e22 CF91      		in r29,__SP_H__
+ 2747 0e24 0895      		sbiw r28,3
+ 2748               		in __tmp_reg__,__SREG__
+ 2749               		cli
+ 2750               		out __SP_H__,r29
+ 2751               		out __SREG__,__tmp_reg__
+ 2752               		out __SP_L__,r28
+ 2753               	/* prologue end (size=10) */
+ 2754               		std Y+2,r25
+ 2755               		std Y+1,r24
+ 2756               		std Y+3,r22
+ 372:lib/turbo_robo.c **** }
+ 373:lib/turbo_robo.c **** 
+ 374:lib/turbo_robo.c **** void fct_forward_right(int time, char spd)
+ 375:lib/turbo_robo.c **** {
+ 2758               	ov r18,r24
+ 2759               		clr r19
+ 2760               		ldd r24,Y+3
+ 2761 0e26 CF93      		clr r25
+ 2762 0e28 DF93      		movw r22,r18
+ 2763 0e2a CDB7      		call speed
+ 2765 0e2e 2397      	.LM282:
+ 2766 0e30 0FB6      		ldi r24,lo8(2)
+ 2767 0e32 F894      		sts left_motor,r24
+ 2769 0e36 0FBE      	.LM283:
+ 2770 0e38 CDBF      		ldi r24,lo8(2)
+ 2771               		sts right_motor,r24
+ 2773 0e3c 8983      	.LM284:
+ 2774 0e3e 6B83      		ldi r24,lo8(1)
+ 376:lib/turbo_robo.c **** 	speed(spd, spd);
+ 2775               	sts (time_global)+1,r25
+ 2776               		sts time_global,r24
+ 2778 0e42 282F      	.LM285:
+ 2779 0e44 3327      		ldd r24,Y+1
+ 2780 0e46 8B81      		ldd r25,Y+2
+ 2781 0e48 9927      		call fct_wait_ts
+ 2783 0e4c 0E94 0000 	.LM286:
+ 377:lib/turbo_robo.c **** 
+ 378:lib/turbo_robo.c **** 	left_motor = 1;
+ 2784               	_motor,__zero_reg__
+ 2786 0e50 81E0      	.LM287:
+ 2787 0e52 8093 0000 		sts right_motor,__zero_reg__
+ 379:lib/turbo_robo.c **** 	right_motor = 0;
+ 2788               	pilogue: frame size=3 */
+ 2789               		adiw r28,3
+ 2790 0e56 1092 0000 		in __tmp_reg__,__SREG__
+ 380:lib/turbo_robo.c **** 	
+ 381:lib/turbo_robo.c **** 	time_global = 1;
+ 2791               	i
+ 2792               		out __SP_H__,r29
+ 2793 0e5a 81E0      		out __SREG__,__tmp_reg__
+ 2794 0e5c 90E0      		out __SP_L__,r28
+ 2795 0e5e 9093 0000 		pop r29
+ 2796 0e62 8093 0000 		pop r28
+ 382:lib/turbo_robo.c **** 
+ 383:lib/turbo_robo.c **** 	fct_wait_ts(time);
+ 2797               	* epilogue end (size=9) */
+ 2798               	/* function fct_backward size 50 (31) */
+ 2800 0e68 9A81      	.Lscope21:
+ 384:lib/turbo_robo.c **** 	
+ 385:lib/turbo_robo.c **** 	left_motor = 0;
+ 2802               	bs	"time:p(0,1)",160,0,0,1
+ 2804 0e6e 1092 0000 	.global	fct_backward_left
+ 386:lib/turbo_robo.c **** 	right_motor = 0;
+ 2805               	ype	fct_backward_left, @function
+ 2806               	fct_backward_left:
+ 2808               	.LM288:
+ 2809 0e76 2396      	/* prologue: frame size=3 */
+ 2810 0e78 0FB6      		push r28
+ 2811 0e7a F894      		push r29
+ 2812 0e7c DEBF      		in r28,__SP_L__
+ 2813 0e7e 0FBE      		in r29,__SP_H__
+ 2814 0e80 CDBF      		sbiw r28,3
+ 2815 0e82 DF91      		in __tmp_reg__,__SREG__
+ 2816 0e84 CF91      		cli
+ 2817 0e86 0895      		out __SP_H__,r29
+ 2818               		out __SREG__,__tmp_reg__
+ 2819               		out __SP_L__,r28
+ 2820               	/* prologue end (size=10) */
+ 2821               		std Y+2,r25
+ 2822               		std Y+1,r24
+ 2823               		std Y+3,r22
+ 2825               	.LM289:
+ 2826               		ldd r24,Y+3
+ 2827               		mov r18,r24
+ 387:lib/turbo_robo.c **** }
+ 388:lib/turbo_robo.c **** 
+ 389:lib/turbo_robo.c **** void fct_backward(int time, char spd)
+ 390:lib/turbo_robo.c **** {
+ 2828               	clr r25
+ 2829               		movw r22,r18
+ 2830               		call speed
+ 2832 0e8a DF93      	.LM290:
+ 2833 0e8c CDB7      		sts left_motor,__zero_reg__
+ 2835 0e90 2397      	.LM291:
+ 2836 0e92 0FB6      		ldi r24,lo8(2)
+ 2837 0e94 F894      		sts right_motor,r24
+ 2839 0e98 0FBE      	.LM292:
+ 2840 0e9a CDBF      		ldi r24,lo8(1)
+ 2841               		ldi r25,hi8(1)
+ 2842 0e9c 9A83      		sts (time_global)+1,r25
+ 2843 0e9e 8983      		sts time_global,r24
+ 391:lib/turbo_robo.c **** 	speed(spd, spd);
+ 2845               	Y+1
+ 2846               		ldd r25,Y+2
+ 2847 0ea2 8B81      		call fct_wait_ts
+ 2849 0ea6 3327      	.LM294:
+ 2850 0ea8 8B81      		sts left_motor,__zero_reg__
+ 2852 0eac B901      	.LM295:
+ 2853 0eae 0E94 0000 		sts right_motor,__zero_reg__
+ 392:lib/turbo_robo.c **** 
+ 393:lib/turbo_robo.c **** 	left_motor = 2;
+ 2854               	ue: frame size=3 */
+ 2855               		adiw r28,3
+ 2856 0eb2 82E0      		in __tmp_reg__,__SREG__
+ 2857 0eb4 8093 0000 		cli
+ 394:lib/turbo_robo.c **** 	right_motor = 2;
+ 2858               	 __SP_H__,r29
+ 2859               		out __SREG__,__tmp_reg__
+ 2860 0eb8 82E0      		out __SP_L__,r28
+ 2861 0eba 8093 0000 		pop r29
+ 395:lib/turbo_robo.c **** 	
+ 396:lib/turbo_robo.c **** 	time_global = 1;
+ 2862               	 r28
+ 2863               		ret
+ 2864 0ebe 81E0      	/* epilogue end (size=9) */
+ 2865 0ec0 90E0      	/* function fct_backward_left size 49 (30) */
+ 2867 0ec6 8093 0000 	.Lscope22:
+ 397:lib/turbo_robo.c **** 
+ 398:lib/turbo_robo.c **** 	fct_wait_ts(time);
+ 2868               	s	"fct_backward_right:F(0,15)",36,0,0,fct_backward_right
+ 2871 0ecc 9A81      	.global	fct_backward_right
+ 399:lib/turbo_robo.c **** 
+ 400:lib/turbo_robo.c **** 	left_motor = 0;
+ 2873               	ackward_right:
+ 2875 0ed2 1092 0000 	.LM296:
+ 401:lib/turbo_robo.c **** 	right_motor = 0;
+ 2876               	prologue: frame size=3 */
+ 2877               		push r28
+ 2878 0ed6 1092 0000 		push r29
+ 2879               		in r28,__SP_L__
+ 2880 0eda 2396      		in r29,__SP_H__
+ 2881 0edc 0FB6      		sbiw r28,3
+ 2882 0ede F894      		in __tmp_reg__,__SREG__
+ 2883 0ee0 DEBF      		cli
+ 2884 0ee2 0FBE      		out __SP_H__,r29
+ 2885 0ee4 CDBF      		out __SREG__,__tmp_reg__
+ 2886 0ee6 DF91      		out __SP_L__,r28
+ 2887 0ee8 CF91      	/* prologue end (size=10) */
+ 2888 0eea 0895      		std Y+2,r25
+ 2889               		std Y+1,r24
+ 2890               		std Y+3,r22
+ 2892               	.LM297:
+ 2893               		ldd r24,Y+3
+ 2894               		mov r18,r24
+ 2895               		clr r19
+ 2896               		ldd r24,Y+3
+ 2897               		clr r25
+ 2898               		movw r22,r18
+ 402:lib/turbo_robo.c **** }
+ 403:lib/turbo_robo.c **** 
+ 404:lib/turbo_robo.c **** void fct_backward_left(int time, char spd)
+ 405:lib/turbo_robo.c **** {
+ 2899               	0,423,.LM298-fct_backward_right
+ 2900               	.LM298:
+ 2901               		ldi r24,lo8(2)
+ 2902 0eec CF93      		sts left_motor,r24
+ 2904 0ef0 CDB7      	.LM299:
+ 2905 0ef2 DEB7      		sts right_motor,__zero_reg__
+ 2907 0ef6 0FB6      	.LM300:
+ 2908 0ef8 F894      		ldi r24,lo8(1)
+ 2909 0efa DEBF      		ldi r25,hi8(1)
+ 2910 0efc 0FBE      		sts (time_global)+1,r25
+ 2911 0efe CDBF      		sts time_global,r24
+ 2913 0f00 9A83      	.LM301:
+ 2914 0f02 8983      		ldd r24,Y+1
+ 2915 0f04 6B83      		ldd r25,Y+2
+ 406:lib/turbo_robo.c **** 	speed(spd, spd);
+ 2916               	
+ 2918 0f06 8B81      	.LM302:
+ 2919 0f08 282F      		sts left_motor,__zero_reg__
+ 2921 0f0c 8B81      	.LM303:
+ 2922 0f0e 9927      		sts right_motor,__zero_reg__
+ 2923 0f10 B901      	/* epilogue: frame size=3 */
+ 2924 0f12 0E94 0000 		adiw r28,3
+ 407:lib/turbo_robo.c **** 
+ 408:lib/turbo_robo.c **** 	left_motor = 0;
+ 2925               	p_reg__,__SREG__
+ 2926               		cli
+ 2927 0f16 1092 0000 		out __SP_H__,r29
+ 409:lib/turbo_robo.c **** 	right_motor = 2;
+ 2928               	t __SREG__,__tmp_reg__
+ 2929               		out __SP_L__,r28
+ 2930 0f1a 82E0      		pop r29
+ 2931 0f1c 8093 0000 		pop r28
+ 410:lib/turbo_robo.c **** 	
+ 411:lib/turbo_robo.c **** 	time_global = 1;
+ 2932               	
+ 2933               	/* epilogue end (size=9) */
+ 2934 0f20 81E0      	/* function fct_backward_right size 49 (30) */
+ 2936 0f24 9093 0000 	.Lscope23:
+ 412:lib/turbo_robo.c **** 
+ 413:lib/turbo_robo.c **** 	fct_wait_ts(time);
+ 2938               	bs	"time:p(0,1)",160,0,0,1
+ 2939               	.global	fct_stop
+ 2941 0f2e 9A81      	fct_stop:
+ 414:lib/turbo_robo.c **** 
+ 415:lib/turbo_robo.c **** 	left_motor = 0;
+ 2943               	4:
+ 2944               	/* prologue: frame size=2 */
+ 2945 0f34 1092 0000 		push r28
+ 416:lib/turbo_robo.c **** 	right_motor = 0;
+ 2946               	sh r29
+ 2947               		in r28,__SP_L__
+ 2948 0f38 1092 0000 		in r29,__SP_H__
+ 2949               		sbiw r28,2
+ 2950 0f3c 2396      		in __tmp_reg__,__SREG__
+ 2951 0f3e 0FB6      		cli
+ 2952 0f40 F894      		out __SP_H__,r29
+ 2953 0f42 DEBF      		out __SREG__,__tmp_reg__
+ 2954 0f44 0FBE      		out __SP_L__,r28
+ 2955 0f46 CDBF      	/* prologue end (size=10) */
+ 2956 0f48 DF91      		std Y+2,r25
+ 2957 0f4a CF91      		std Y+1,r24
+ 2959               	.LM305:
+ 2960               		sts left_motor,__zero_reg__
+ 2962               	.LM306:
+ 2963               		sts right_motor,__zero_reg__
+ 2965               	.LM307:
+ 2966               		ldi r24,lo8(1)
+ 2967               		ldi r25,hi8(1)
+ 2968               		sts (time_global)+1,r25
+ 417:lib/turbo_robo.c **** }
+ 418:lib/turbo_robo.c **** 
+ 419:lib/turbo_robo.c **** void fct_backward_right(int time, char spd)
+ 420:lib/turbo_robo.c **** {
+ 2969               	stabn	68,0,441,.LM308-fct_stop
+ 2970               	.LM308:
+ 2971               		ldd r24,Y+1
+ 2972 0f4e CF93      		ldd r25,Y+2
+ 2973 0f50 DF93      		call fct_wait_ts
+ 2974 0f52 CDB7      	/* epilogue: frame size=2 */
+ 2975 0f54 DEB7      		adiw r28,2
+ 2976 0f56 2397      		in __tmp_reg__,__SREG__
+ 2977 0f58 0FB6      		cli
+ 2978 0f5a F894      		out __SP_H__,r29
+ 2979 0f5c DEBF      		out __SREG__,__tmp_reg__
+ 2980 0f5e 0FBE      		out __SP_L__,r28
+ 2981 0f60 CDBF      		pop r29
+ 2982               		pop r28
+ 2983 0f62 9A83      		ret
+ 2984 0f64 8983      	/* epilogue end (size=9) */
+ 2985 0f66 6B83      	/* function fct_stop size 35 (16) */
+ 421:lib/turbo_robo.c **** 	speed(spd, spd);
+ 2986               	.-fct_stop
+ 2987               	.Lscope24:
+ 2991 0f6e 8B81      	.global	fct_turn_right
+ 2993 0f72 B901      	fct_turn_right:
+ 422:lib/turbo_robo.c **** 
+ 423:lib/turbo_robo.c **** 	left_motor = 2;
+ 2995               	* prologue: frame size=3 */
+ 2996               		push r28
+ 2997 0f78 82E0      		push r29
+ 2998 0f7a 8093 0000 		in r28,__SP_L__
+ 424:lib/turbo_robo.c **** 	right_motor = 0;
+ 2999               	r29,__SP_H__
+ 3000               		sbiw r28,3
+ 3001 0f7e 1092 0000 		in __tmp_reg__,__SREG__
+ 425:lib/turbo_robo.c **** 	
+ 426:lib/turbo_robo.c **** 	time_global = 1;
+ 3002               	i
+ 3003               		out __SP_H__,r29
+ 3004 0f82 81E0      		out __SREG__,__tmp_reg__
+ 3005 0f84 90E0      		out __SP_L__,r28
+ 3006 0f86 9093 0000 	/* prologue end (size=10) */
+ 3007 0f8a 8093 0000 		std Y+2,r25
+ 427:lib/turbo_robo.c **** 
+ 428:lib/turbo_robo.c **** 	fct_wait_ts(time);
+ 3008               	+1,r24
+ 3009               		std Y+3,r22
+ 3011 0f90 9A81      	.LM310:
+ 3012 0f92 0E94 0000 		ldd r24,Y+3
+ 429:lib/turbo_robo.c **** 
+ 430:lib/turbo_robo.c **** 	left_motor = 0;
+ 3013               	r18,r24
+ 3014               		clr r19
+ 3015 0f96 1092 0000 		ldd r24,Y+3
+ 431:lib/turbo_robo.c **** 	right_motor = 0;
+ 3016               	r r25
+ 3017               		movw r22,r18
+ 3018 0f9a 1092 0000 		call speed
+ 3020 0f9e 2396      	.LM311:
+ 3021 0fa0 0FB6      		ldi r24,lo8(1)
+ 3022 0fa2 F894      		sts left_motor,r24
+ 3024 0fa6 0FBE      	.LM312:
+ 3025 0fa8 CDBF      		ldi r24,lo8(2)
+ 3026 0faa DF91      		sts right_motor,r24
+ 3028 0fae 0895      	.LM313:
+ 3029               		ldi r24,lo8(1)
+ 3030               		ldi r25,hi8(1)
+ 3031               		sts (time_global)+1,r25
+ 3032               		sts time_global,r24
+ 3034               	.LM314:
+ 3035               		ldd r24,Y+1
+ 3036               		ldd r25,Y+2
+ 3037               		call fct_wait_ts
+ 432:lib/turbo_robo.c **** }
+ 433:lib/turbo_robo.c **** 
+ 434:lib/turbo_robo.c **** void fct_stop(int time)
+ 435:lib/turbo_robo.c **** {
+ 3038               	5-fct_turn_right
+ 3039               	.LM315:
+ 3040               		sts left_motor,__zero_reg__
+ 3042 0fb2 DF93      	.LM316:
+ 3043 0fb4 CDB7      		sts right_motor,__zero_reg__
+ 3044 0fb6 DEB7      	/* epilogue: frame size=3 */
+ 3045 0fb8 2297      		adiw r28,3
+ 3046 0fba 0FB6      		in __tmp_reg__,__SREG__
+ 3047 0fbc F894      		cli
+ 3048 0fbe DEBF      		out __SP_H__,r29
+ 3049 0fc0 0FBE      		out __SREG__,__tmp_reg__
+ 3050 0fc2 CDBF      		out __SP_L__,r28
+ 3051               		pop r29
+ 3052 0fc4 9A83      		pop r28
+ 3053 0fc6 8983      		ret
+ 436:lib/turbo_robo.c **** 	left_motor = 0;
+ 3054               	(size=9) */
+ 3055               	/* function fct_turn_right size 50 (31) */
+ 437:lib/turbo_robo.c **** 	right_motor = 0;
+ 3057               	cope25:
+ 438:lib/turbo_robo.c **** 	
+ 439:lib/turbo_robo.c **** 	time_global = 1;
+ 3060               	tabs	"spd:p(0,2)",160,0,0,3
+ 3061               	.global	fct_turn_left
+ 3063 0fd2 90E0      	fct_turn_left:
+ 3065 0fd8 8093 0000 	.LM317:
+ 440:lib/turbo_robo.c **** 
+ 441:lib/turbo_robo.c **** 	fct_wait_ts(time);
+ 3066               	logue: frame size=3 */
+ 3067               		push r28
+ 3068 0fdc 8981      		push r29
+ 3069 0fde 9A81      		in r28,__SP_L__
+ 3070 0fe0 0E94 0000 		in r29,__SP_H__
+ 3071               		sbiw r28,3
+ 3072 0fe4 2296      		in __tmp_reg__,__SREG__
+ 3073 0fe6 0FB6      		cli
+ 3074 0fe8 F894      		out __SP_H__,r29
+ 3075 0fea DEBF      		out __SREG__,__tmp_reg__
+ 3076 0fec 0FBE      		out __SP_L__,r28
+ 3077 0fee CDBF      	/* prologue end (size=10) */
+ 3078 0ff0 DF91      		std Y+2,r25
+ 3079 0ff2 CF91      		std Y+1,r24
+ 3080 0ff4 0895      		std Y+3,r22
+ 3082               	.LM318:
+ 3083               		ldd r24,Y+3
+ 3084               		mov r18,r24
+ 3085               		clr r19
+ 3086               		ldd r24,Y+3
+ 3087               		clr r25
+ 3088               		movw r22,r18
+ 3089               		call speed
+ 442:lib/turbo_robo.c **** }
+ 443:lib/turbo_robo.c **** 
+ 444:lib/turbo_robo.c **** void fct_turn_right(int time, char spd)
+ 445:lib/turbo_robo.c **** {
+ 3091               	sts left_motor,r24
+ 3093               	.LM320:
+ 3094 0ff6 CF93      		ldi r24,lo8(1)
+ 3095 0ff8 DF93      		sts right_motor,r24
+ 3097 0ffc DEB7      	.LM321:
+ 3098 0ffe 2397      		ldi r24,lo8(1)
+ 3099 1000 0FB6      		ldi r25,hi8(1)
+ 3100 1002 F894      		sts (time_global)+1,r25
+ 3101 1004 DEBF      		sts time_global,r24
+ 3103 1008 CDBF      	.LM322:
+ 3104               		ldd r24,Y+1
+ 3105 100a 9A83      		ldd r25,Y+2
+ 3106 100c 8983      		call fct_wait_ts
+ 446:lib/turbo_robo.c **** 	speed(spd, spd);
+ 3108               	_motor,__zero_reg__
+ 3110 1010 8B81      	.LM324:
+ 3111 1012 282F      		sts right_motor,__zero_reg__
+ 3112 1014 3327      	/* epilogue: frame size=3 */
+ 3113 1016 8B81      		adiw r28,3
+ 3114 1018 9927      		in __tmp_reg__,__SREG__
+ 3115 101a B901      		cli
+ 3116 101c 0E94 0000 		out __SP_H__,r29
+ 447:lib/turbo_robo.c **** 
+ 448:lib/turbo_robo.c **** 	left_motor = 1;
+ 3117               	EG__,__tmp_reg__
+ 3118               		out __SP_L__,r28
+ 3119 1020 81E0      		pop r29
+ 3120 1022 8093 0000 		pop r28
+ 449:lib/turbo_robo.c **** 	right_motor = 2;
+ 3121               	
+ 3122               	/* epilogue end (size=9) */
+ 3123 1026 82E0      	/* function fct_turn_left size 50 (31) */
+ 450:lib/turbo_robo.c **** 	
+ 451:lib/turbo_robo.c **** 	time_global = 1;
+ 3125               	cope26:
+ 3128 102e 90E0      	.global	main
+ 3130 1034 8093 0000 	main:
+ 452:lib/turbo_robo.c **** 
+ 453:lib/turbo_robo.c **** 	fct_wait_ts(time);
+ 3131               	9) */
+ 3132               	/* function fct_turn_left size 50 (31) */
+ 3134 103a 9A81      	.Lscope26:
+ 454:lib/turbo_robo.c **** 
+ 455:lib/turbo_robo.c **** 	left_motor = 0;
+ 3136               	bs	"main:F(0,1)",36,0,0,main
+ 3137               	.global	main
+ 456:lib/turbo_robo.c **** 	right_motor = 0;
+ 3139               	 (size=9) */
+ 3140               	/* function fct_turn_left size 50 (31) */
+ 3142               	.Lscope26:
+ 3145 104c F894      	.global	main
+ 3147 1050 0FBE      	main:
+ 3149 1054 DF91      	.Ltext3:
+ 3151 1058 0895      	.LM325:
+ 3152               	/* prologue: frame size=6 */
+ 3153               		push r28
+ 3154               		push r29
+ 3155               		in r28,__SP_L__
+ 3156               		in r29,__SP_H__
+ 3157               		sbiw r28,6
+ 3158               		in __tmp_reg__,__SREG__
+ 3159               		cli
+ 3160               		out __SP_H__,r29
+ 3161               		out __SREG__,__tmp_reg__
+ 457:lib/turbo_robo.c **** }
+ 458:lib/turbo_robo.c **** 
+ 459:lib/turbo_robo.c **** void fct_turn_left(int time, char spd)
+ 460:lib/turbo_robo.c **** {
+ 3162               	ologue end (size=10) */
+ 3164               	.LM326:
+ 3165 105a CF93      		call init_out
+ 3167 105e CDB7      	.LM327:
+ 3168 1060 DEB7      		call init_in
+ 3170 1064 0FB6      	.LM328:
+ 3171 1066 F894      		call init_timer
+ 3173 106a 0FBE      	.LM329:
+ 3174 106c CDBF      		call init_in_ana
+ 3176 106e 9A83      	.LM330:
+ 3177 1070 8983      	/* #APP */
+ 3178 1072 6B83      		sei
+ 461:lib/turbo_robo.c **** 	speed(spd, spd);
+ 3180               	.LM328:
+ 3181 1074 8B81      		call init_timer
+ 3183 1078 3327      	.LM329:
+ 3184 107a 8B81      		call init_in_ana
+ 3186 107e B901      	.LM330:
+ 3187 1080 0E94 0000 	/* #APP */
+ 462:lib/turbo_robo.c **** 
+ 463:lib/turbo_robo.c **** 	left_motor = 2;
+ 3188               	it_in
+ 3190 1084 82E0      	.LM328:
+ 3191 1086 8093 0000 		call init_timer
+ 464:lib/turbo_robo.c **** 	right_motor = 1;
+ 3192               	size=10) */
+ 3194 108a 81E0      	.LM326:
+ 3195 108c 8093 0000 		call init_out
+ 465:lib/turbo_robo.c **** 	
+ 466:lib/turbo_robo.c **** 	time_global = 1;
+ 3196               		in __tmp_reg__,__SREG__
+ 3197               		cli
+ 3198 1090 81E0      		out __SP_H__,r29
+ 3199 1092 90E0      		out __SREG__,__tmp_reg__
+ 3200 1094 9093 0000 		out __SP_L__,r28
+ 3201 1098 8093 0000 	/* prologue end (size=10) */
+ 467:lib/turbo_robo.c **** 
+ 468:lib/turbo_robo.c **** 	fct_wait_ts(time);
+ 3202               	ush r29
+ 3203               		in r28,__SP_L__
+ 3204 109c 8981      		in r29,__SP_H__
+ 3205 109e 9A81      		sbiw r28,6
+ 3206 10a0 0E94 0000 		in __tmp_reg__,__SREG__
+ 469:lib/turbo_robo.c **** 
+ 470:lib/turbo_robo.c **** 	left_motor = 0;
+ 3207               	32,0,0,.Ltext3
+ 3208               	.Ltext3:
+ 471:lib/turbo_robo.c **** 	right_motor = 0;
+ 3210               	ct_turn_left
+ 3211               	.Lscope26:
+ 3214 10ac 2396      	.global	main
+ 3216 10b0 F894      	main:
+ 3218 10b4 0FBE      	.Ltext3:
+ 3220 10b8 DF91      	.LM325:
+ 3221 10ba CF91      	/* prologue: frame size=6 */
+ 3222 10bc 0895      		push r28
+ 3223               		push r29
+ 3224               		in r28,__SP_L__
+ 3225               		in r29,__SP_H__
+ 3226               		sbiw r28,6
+ 3227               		in __tmp_reg__,__SREG__
+ 3228               		cli
+ 3229               		out __SP_H__,r29
+ 3230               		out __SREG__,__tmp_reg__
+ 3231               		out __SP_L__,r28
+ 3232               	/* prologue end (size=10) */
+   1:main.c        **** #define LEFT_INFRA
+   2:main.c        **** #define RIGHT_INFRA
+   3:main.c        **** 
+   4:main.c        **** #include "lib/mct_fct.c"
+   5:main.c        **** #include <avr/interrupt.h>
+   6:main.c        **** #include <avr/signal.h>
+   7:main.c        **** #include "lib/turbo_robo.c"
+   8:main.c        **** 
+   9:main.c        **** void seq_1(void);
+  10:main.c        **** void seq_2(void);
+  11:main.c        **** void seq_3(void);
+  12:main.c        **** 
+  13:main.c        **** int main()
+  14:main.c        **** {
+ 3235               	.LM327:
+ 3236               		call init_in
+ 3238 10c0 DF93      	.LM328:
+ 3239 10c2 CDB7      		call init_timer
+ 3241 10c6 2697      	.LM329:
+ 3242 10c8 0FB6      		call init_in_ana
+ 3244 10cc DEBF      	.LM330:
+ 3245 10ce 0FBE      	/* #APP */
+ 3246 10d0 CDBF      		sei
+ 3247               	/* #NOAPP */
+  15:main.c        ****     int i;
+  16:main.c        ****     int j;
+  17:main.c        ****     int k;
+  18:main.c        **** 
+  19:main.c        ****     init_out();
+ 3248               	1,.LM328-main
+ 3249               	.LM328:
+ 3250 10d2 0E94 0000 		call init_timer
+  20:main.c        ****     init_in();
+ 3251               	size=10) */
+ 3253 10d6 0E94 0000 	.LM326:
+  21:main.c        ****     init_timer();
+ 3254               	H__
+ 3255               		sbiw r28,6
+ 3256 10da 0E94 0000 		in __tmp_reg__,__SREG__
+  22:main.c        ****     init_in_ana();
+ 3257               	32,0,0,.Ltext3
+ 3258               	.Ltext3:
+  23:main.c        ****     sei();
+ 3260               	ct_turn_left
+ 3261               	.Lscope26:
+ 3264               	.global	main
+  24:main.c        ****     while((get_in_pin(7)));
+ 3267               	.Ltext3:
+ 3269 10e6 0E94 0000 	.LM325:
+ 3270 10ea 8823      	/* prologue: frame size=6 */
+ 3271 10ec 01F4      		push r28
+ 3272 10ee 00C0      		push r29
+ 3273               		in r28,__SP_L__
+ 3274               		in r29,__SP_H__
+  25:main.c        **** 
+  26:main.c        ****     while(1)
+  27:main.c        ****     {
+  28:main.c        ****         fct_forward(1000, 10);
+ 3275               	ain, @function
+ 3276               	main:
+ 3278 10f2 88EE      	.Ltext3:
+ 3280 10f6 0E94 0000 	.LM325:
+  29:main.c        ****         fct_backward(1000, 10);
+ 3281               	eft
+ 3282               	.Lscope26:
+ 3285 10fe 93E0      	.global	main
+  30:main.c        **** #ifdef LEFT_INFRA
+  31:main.c        ****         if (!left_infra)
+ 3287               	 (size=9) */
+ 3288               	/* function fct_turn_left size 50 (31) */
+ 3290 1108 8823      	.Lscope26:
+  32:main.c        ****         {
+  33:main.c        ****             sensor_fct = 1;
+ 3292               	bs	"main:F(0,1)",36,0,0,main
+ 3293               	.global	main
+ 3295 110e 8093 0000 	main:
+  34:main.c        ****             fct_turn_left(1000, 10);
+ 3296               	9) */
+ 3297               	/* function fct_turn_left size 50 (31) */
+ 3299 1114 88EE      	.Lscope26:
+  35:main.c        ****             sensor_fct = 0;
+ 3302               	l	main
+ 3304 111c 1092 0000 	main:
+  36:main.c        ****         }
+  37:main.c        **** #endif
+  38:main.c        **** #ifdef RIGHT_INFRA
+  39:main.c        ****         if (!right_infra)
+ 3306               	ze 50 (31) */
+ 3308 1120 8091 0000 	.Lscope26:
+  40:main.c        ****         {
+  41:main.c        ****             sensor_fct = 1;
+ 3311               	al	main
+ 3313 1128 81E0      	main:
+  42:main.c        ****             fct_turn_right(1000, 10);
+ 3315               	ze 50 (31) */
+ 3317 112e 6AE0      	.Lscope26:
+ 3320 1134 0E94 0000 	.global	main
+  43:main.c        ****             sensor_fct = 0;
+ 3321               		main, @function
+ 3322               	main:
+  44:main.c        ****         }
+  45:main.c        **** #endif
+  46:main.c        ****     }
+ 3324               	ze 50 (31) */
+ 3326 113c 00C0      	.Lscope26:
+ 3329               	.global	main
+ 3331               	main:
+ 3333               	.Ltext3:
+ 3335               	.LM325:
+ 3336               	/* prologue: frame size=6 */
+ 3337               		push r28
+ 3338               		push r29
+ 3339               		in r28,__SP_L__
+ 3340               		in r29,__SP_H__
+ 3341               		sbiw r28,6
+  47:main.c        **** }
+  48:main.c        **** 
+  49:main.c        **** void seq_1(void)
+  50:main.c        **** {
+ 3342               	SREG__
+ 3343               		cli
+ 3344               		out __SP_H__,r29
+ 3345 113e CF93      		out __SREG__,__tmp_reg__
+ 3346 1140 DF93      		out __SP_L__,r28
+ 3347 1142 CDB7      	/* prologue end (size=10) */
+ 3349               	.LM326:
+ 3350               		call init_out
+ 3352 1148 CF91      	.LM327:
+ 3353 114a 0895      		call init_in
+ 3355               	.LM328:
+ 3356               		call init_timer
+ 3358               	.LM329:
+ 3359               		call init_in_ana
+ 3361               	.LM330:
+  51:main.c        **** }
+  52:main.c        **** 
+  53:main.c        **** void seq_2(void)
+  54:main.c        **** {
+ 3362               	27:
+ 3363               		call init_in
+ 3365 114c CF93      	.LM328:
+ 3366 114e DF93      		call init_timer
+ 3368 1152 DEB7      	.LM329:
+ 3369               		call init_in_ana
+ 3371 1154 DF91      	.LM330:
+ 3372 1156 CF91      	/* #APP */
+ 3373 1158 0895      		sei
+ 3374               	/* #NOAPP */
+ 3375               	.L200:
+ 3377               	.LM331:
+ 3378               		ldi r24,lo8(7)
+ 3379               		call get_in_pin
+ 3380               		tst r24
+ 3381               		brne .L200
+  55:main.c        **** }
+  56:main.c        **** 
+  57:main.c        **** void seq_3(void)
+  58:main.c        **** {
+ 3382               	0,23,.LM330-main
+ 3383               	.LM330:
+ 3384               	/* #APP */
+ 3385 115a CF93      		sei
+ 3386 115c DF93      	/* #NOAPP */
+ 3387 115e CDB7      	.L200:
+ 3389               	.LM331:
+ 3390               		ldi r24,lo8(7)
+ 3391 1162 DF91      		call get_in_pin
+ 3392 1164 CF91      		tst r24
+ 3393 1166 0895      		brne .L200
+ 3394               		rjmp .L207
+ 3395               	.L201:
+ 3396               	.L207:
+ 3398               	.LM332:
+ 3399               		ldi r22,lo8(10)
+ 3400               		ldi r24,lo8(1000)
+ 3401               		ldi r25,hi8(1000)
+ 3402               		call fct_forward
+ 3404               	.LM333:
+ 3405               		ldi r22,lo8(10)
+ 3406               		ldi r24,lo8(1000)
+ 3407               		ldi r25,hi8(1000)
+ 3408               		call fct_backward
+ 3410               	.LM334:
+ 3411               		lds r24,left_infra
+ 3412               		tst r24
+ 3413               		brne .L202
+ 3415               	.LM335:
+ 3416               		ldi r24,lo8(1)
+ 3417               		sts sensor_fct,r24
+ 3419               	.LM336:
+ 3420               		ldi r22,lo8(10)
+ 3421               		ldi r24,lo8(1000)
+ 3422               		ldi r25,hi8(1000)
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:3      *ABS*:0000003f __SREG__
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:4      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:5      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:7      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:71     .text:00000000 init_serial
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:122    .text:00000034 init_in_ana
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:163    .text:00000060 init_in
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:189    .text:00000074 get_in_pin
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:265    .text:000000d2 get_in_port
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:313    .text:00000106 init_out
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:358    .text:00000134 set_out_pin
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:560    .text:00000254 reset_out_pin
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:755    .text:00000366 toggle_out_pin
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:958    .text:00000488 set_out_ports
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1141   .text:0000057a lcd
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1336   .bss:00000000 i
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1342   .bss:00000001 time_global
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1348   .bss:00000003 speed_left
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1354   .bss:00000005 speed_right
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1360   .bss:00000007 left_motor
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1366   .bss:00000008 right_motor
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1372   .bss:00000009 left_trigger
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1378   .bss:0000000a right_trigger
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1384   .bss:0000000b left_infra
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1390   .bss:0000000c right_infra
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1396   .data:00000000 left_line
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1401   .data:00000002 right_line
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1408   .bss:0000000d battery_state_pre
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1414   .bss:0000000f ad_pin
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1420   .bss:00000010 battery_state
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1426   .bss:00000012 sensor_fct
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1432   .bss:00000013 brght_left
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1438   .bss:00000018 brght_right
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1444   .bss:0000001d battery
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1450   .bss:00000022 i_right
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1457   .text:00000684 __vector_16
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1597   .text:0000076a __vector_5
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1637   .text:000007a4 __vector_11
+                            *COM*:00000001 i_left
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1897   .text:00000942 init_timer
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:1950   .text:0000097a speed
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:2399   .text:00000c30 fct_wait_ts
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:2484   .text:00000cae fct_drive
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:2616   .text:00000d60 fct_forward
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:2687   .text:00000dc4 fct_forward_left
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:2757   .text:00000e26 fct_forward_right
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:2827   .text:00000e88 fct_backward
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:2898   .text:00000eec fct_backward_left
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:2968   .text:00000f4e fct_backward_right
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:3037   .text:00000fb0 fct_stop
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:3090   .text:00000ff6 fct_turn_right
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:3161   .text:0000105a fct_turn_left
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:3231   .text:000010be main
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:3341   .text:0000113e seq_1
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:3361   .text:0000114c seq_2
+C:\DOCUME~1\ALEXAN~1.WEG\LOCALS~1\Temp/cceXbXxR.s:3381   .text:0000115a seq_3
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+__divmodhi4
