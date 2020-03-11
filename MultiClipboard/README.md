@@ -8,6 +8,8 @@ All source files can by found in the [src](https://github.com/Stish/random/tree/
 
 The 64bit compiled programm can be found in the [exe](https://github.com/Stish/random/tree/master/MultiClipboard/exe) folder.
 
+**Licensing: cc by-nc-sa 4.0**
+
 ## History - Latest version is v0.3
 
 ### v0.3
