@@ -1,0 +1,12 @@
+ if SaveDialog1.Execute then
+    Memo1.Lines.SaveToFile( SaveDialog1.Filename );
+At the same time, Delphi offers all the power of the Object Pascal language, ... or from a line of code in the program, triggers the BothSpinEditChange event handler method ... Select the brush into a device context, saving the old brush. ... If an icon handle was successfully acquired, ProcessFile adds a new item to the list box ...
+Sehr geehrte(r) Alexander Wegner, Alexander Wegner,
+
+vielen Dank, dass Sie Ihren Helpdesk kontaktiert haben.
+
+Wir bearbeiten Ihre Anfrage unter dem Titel DOORS - Beantragung einer Erweiterung in DOORS - undefined
+
+unter der Vorgangsnummer
+IM74384313.
+

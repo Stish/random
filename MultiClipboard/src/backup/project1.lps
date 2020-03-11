@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="11"/>
+    <BuildModes Active="Default"/>
+    <Units Count="6">
+      <Unit0>
+        <Filename Value="project1.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="2"/>
+        <CursorPos X="47" Y="17"/>
+        <UsageCount Value="66"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="unit1.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Unit1"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="156"/>
+        <CursorPos X="6" Y="159"/>
+        <FoldState Value=" TL Hj5014"/>
+        <UsageCount Value="66"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="C:\Users\ESSIZIQ\AppData\Local\Temp\_PA651\unit1.pas"/>
+        <UnitName Value="Unit1"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="45"/>
+        <UsageCount Value="7"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="C:\Users\ESSIZIQ\AppData\Local\Temp\_PA597\51_ChangeAppIcon\main.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="8"/>
+        <CursorPos Y="39"/>
+        <UsageCount Value="9"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="C:\Tools\Lazarus\lcl\include\control.inc"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="3451"/>
+        <CursorPos Y="3476"/>
+        <UsageCount Value="19"/>
+        <Loaded Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="project.rc"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit5>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="564" Column="54" TopLine="526"/>
+      </Position1>
+      <Position2>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="569" Column="45" TopLine="528"/>
+      </Position2>
+      <Position3>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="574" Column="33" TopLine="458"/>
+      </Position3>
+      <Position4>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="205" Column="8" TopLine="200"/>
+      </Position4>
+      <Position5>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="562" Column="46" TopLine="531"/>
+      </Position5>
+      <Position6>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="239" Column="68" TopLine="216"/>
+      </Position6>
+      <Position7>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="233" Column="75" TopLine="207"/>
+      </Position7>
+      <Position8>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="580" Column="22" TopLine="534"/>
+      </Position8>
+      <Position9>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="577" Column="9" TopLine="536"/>
+      </Position9>
+      <Position10>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="574" Column="50" TopLine="536"/>
+      </Position10>
+      <Position11>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="580" Column="7" TopLine="536"/>
+      </Position11>
+      <Position12>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="471" TopLine="450"/>
+      </Position12>
+      <Position13>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="581" Column="61" TopLine="536"/>
+      </Position13>
+      <Position14>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="574" Column="35" TopLine="533"/>
+      </Position14>
+      <Position15>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="469" Column="32" TopLine="449"/>
+      </Position15>
+      <Position16>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="575" Column="9" TopLine="534"/>
+      </Position16>
+      <Position17>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="576" Column="27" TopLine="535"/>
+      </Position17>
+      <Position18>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="578" Column="7" TopLine="538"/>
+      </Position18>
+      <Position19>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="574" Column="87" TopLine="538"/>
+      </Position19>
+      <Position20>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="190" Column="6" TopLine="188"/>
+      </Position20>
+      <Position21>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="578" Column="9" TopLine="538"/>
+      </Position21>
+      <Position22>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="575" Column="81" TopLine="538"/>
+      </Position22>
+      <Position23>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="574" Column="81" TopLine="537"/>
+      </Position23>
+      <Position24>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="202" Column="5" TopLine="177"/>
+      </Position24>
+      <Position25>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="468" Column="21" TopLine="444"/>
+      </Position25>
+      <Position26>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="486" Column="6" TopLine="444"/>
+      </Position26>
+      <Position27>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="276" Column="45" TopLine="274"/>
+      </Position27>
+      <Position28>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="235" Column="60" TopLine="209"/>
+      </Position28>
+      <Position29>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="276" Column="240" TopLine="271"/>
+      </Position29>
+      <Position30>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="241" Column="95"/>
+      </Position30>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes Count="0" ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+  <Debugging>
+    <BreakPoints Count="1">
+      <Item1>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="project1.lpr"/>
+        <Line Value="23"/>
+      </Item1>
+    </BreakPoints>
+  </Debugging>
+</CONFIG>
