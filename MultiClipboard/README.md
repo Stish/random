@@ -2,6 +2,8 @@
 
 Windows programm to manage multiple clipboard snippets.
 
+![Screenshot](https://github.com/Stish/random/blob/master/MultiClipboard/doc/main_screen.JPG)
+
 This programm is written in Lazarus. Lazarus is a professional open-source cross platform IDE powered by Free Pascal. Please find all information on https://www.lazarus-ide.org/
 
 All source files can by found in the [src](https://github.com/Stish/random/tree/master/MultiClipboard/src) folder.
