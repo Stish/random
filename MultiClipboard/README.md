@@ -6,7 +6,7 @@ This programm is written in Lazarus. Lazarus is a professional open-source cross
 
 All source files can by found in the [src](https://github.com/Stish/random/tree/master/MultiClipboard/src) folder.
 
-The 64bit compiled programm can be found in the [exe](https://github.com/Stish/random/tree/master/MultiClipboard/exe) folder.
+The 64bit compiled programm for MS Windows can be found in the [exe](https://github.com/Stish/random/tree/master/MultiClipboard/exe) folder.
 
 **Licensing:** [**cc by-nc-sa 4.0**](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
